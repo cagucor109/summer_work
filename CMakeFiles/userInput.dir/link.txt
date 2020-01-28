@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/userInput.dir/userInput.cpp.o CMakeFiles/userInput.dir/ZMQcoms.cpp.o CMakeFiles/userInput.dir/SQLAPIcoms.cpp.o CMakeFiles/userInput.dir/Robot.cpp.o  -o userInput -lzmq -lsqlapi -ldl 

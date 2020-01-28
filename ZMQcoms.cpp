@@ -67,6 +67,14 @@ std::string ZMQcoms::requestMessage(std::string message){
     return s_recv(*_socket);
 }
 
+std::string ZMQcoms::replyWait(){
+    return s_recv(*_socket);
+}
+
+void ZMQcoms::replyMessage(std::string message){
+    s_send(*_socket, message);
+}
+
 ZMQcoms::~ZMQcoms(){
     delete _context;
     delete _socket;

@@ -137,19 +137,6 @@ taskPublisher/fast:
 .PHONY : taskPublisher/fast
 
 #=============================================================================
-# Target rules for targets named test_sub
-
-# Build rule for target.
-test_sub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_sub
-.PHONY : test_sub
-
-# fast build rule for target.
-test_sub/fast:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/build
-.PHONY : test_sub/fast
-
-#=============================================================================
 # Target rules for targets named test_pub
 
 # Build rule for target.
@@ -163,17 +150,30 @@ test_pub/fast:
 .PHONY : test_pub/fast
 
 #=============================================================================
-# Target rules for targets named tableGenerator2
+# Target rules for targets named test_sub
 
 # Build rule for target.
-tableGenerator2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tableGenerator2
-.PHONY : tableGenerator2
+test_sub: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_sub
+.PHONY : test_sub
 
 # fast build rule for target.
-tableGenerator2/fast:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/build
-.PHONY : tableGenerator2/fast
+test_sub/fast:
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/build
+.PHONY : test_sub/fast
+
+#=============================================================================
+# Target rules for targets named userInput
+
+# Build rule for target.
+userInput: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 userInput
+.PHONY : userInput
+
+# fast build rule for target.
+userInput/fast:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/build
+.PHONY : userInput/fast
 
 Robot.o: Robot.cpp.o
 
@@ -181,7 +181,7 @@ Robot.o: Robot.cpp.o
 
 # target to build an object file
 Robot.cpp.o:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/Robot.cpp.o
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.o
 .PHONY : Robot.cpp.o
 
 Robot.i: Robot.cpp.i
@@ -190,7 +190,7 @@ Robot.i: Robot.cpp.i
 
 # target to preprocess a source file
 Robot.cpp.i:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/Robot.cpp.i
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.i
 .PHONY : Robot.cpp.i
 
 Robot.s: Robot.cpp.s
@@ -199,7 +199,7 @@ Robot.s: Robot.cpp.s
 
 # target to generate assembly for a file
 Robot.cpp.s:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/Robot.cpp.s
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.s
 .PHONY : Robot.cpp.s
 
 SQLAPIcoms.o: SQLAPIcoms.cpp.o
@@ -208,7 +208,7 @@ SQLAPIcoms.o: SQLAPIcoms.cpp.o
 
 # target to build an object file
 SQLAPIcoms.cpp.o:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/SQLAPIcoms.cpp.o
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.o
 .PHONY : SQLAPIcoms.cpp.o
 
 SQLAPIcoms.i: SQLAPIcoms.cpp.i
@@ -217,7 +217,7 @@ SQLAPIcoms.i: SQLAPIcoms.cpp.i
 
 # target to preprocess a source file
 SQLAPIcoms.cpp.i:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/SQLAPIcoms.cpp.i
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.i
 .PHONY : SQLAPIcoms.cpp.i
 
 SQLAPIcoms.s: SQLAPIcoms.cpp.s
@@ -226,7 +226,7 @@ SQLAPIcoms.s: SQLAPIcoms.cpp.s
 
 # target to generate assembly for a file
 SQLAPIcoms.cpp.s:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/SQLAPIcoms.cpp.s
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.s
 .PHONY : SQLAPIcoms.cpp.s
 
 ZMQcoms.o: ZMQcoms.cpp.o
@@ -235,9 +235,9 @@ ZMQcoms.o: ZMQcoms.cpp.o
 
 # target to build an object file
 ZMQcoms.cpp.o:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.o
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/ZMQcoms.cpp.o
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.o
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.o
 .PHONY : ZMQcoms.cpp.o
 
 ZMQcoms.i: ZMQcoms.cpp.i
@@ -246,9 +246,9 @@ ZMQcoms.i: ZMQcoms.cpp.i
 
 # target to preprocess a source file
 ZMQcoms.cpp.i:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.i
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/ZMQcoms.cpp.i
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.i
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.i
 .PHONY : ZMQcoms.cpp.i
 
 ZMQcoms.s: ZMQcoms.cpp.s
@@ -257,37 +257,10 @@ ZMQcoms.s: ZMQcoms.cpp.s
 
 # target to generate assembly for a file
 ZMQcoms.cpp.s:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.s
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/ZMQcoms.cpp.s
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.s
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.s
 .PHONY : ZMQcoms.cpp.s
-
-tableGenerator2.o: tableGenerator2.cpp.o
-
-.PHONY : tableGenerator2.o
-
-# target to build an object file
-tableGenerator2.cpp.o:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/tableGenerator2.cpp.o
-.PHONY : tableGenerator2.cpp.o
-
-tableGenerator2.i: tableGenerator2.cpp.i
-
-.PHONY : tableGenerator2.i
-
-# target to preprocess a source file
-tableGenerator2.cpp.i:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/tableGenerator2.cpp.i
-.PHONY : tableGenerator2.cpp.i
-
-tableGenerator2.s: tableGenerator2.cpp.s
-
-.PHONY : tableGenerator2.s
-
-# target to generate assembly for a file
-tableGenerator2.cpp.s:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/tableGenerator2.cpp.s
-.PHONY : tableGenerator2.cpp.s
 
 taskPublisher.o: taskPublisher.cpp.o
 
@@ -397,6 +370,33 @@ test_sub.cpp.s:
 	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/test_sub.cpp.s
 .PHONY : test_sub.cpp.s
 
+userInput.o: userInput.cpp.o
+
+.PHONY : userInput.o
+
+# target to build an object file
+userInput.cpp.o:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/userInput.cpp.o
+.PHONY : userInput.cpp.o
+
+userInput.i: userInput.cpp.i
+
+.PHONY : userInput.i
+
+# target to preprocess a source file
+userInput.cpp.i:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/userInput.cpp.i
+.PHONY : userInput.cpp.i
+
+userInput.s: userInput.cpp.s
+
+.PHONY : userInput.s
+
+# target to generate assembly for a file
+userInput.cpp.s:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/userInput.cpp.s
+.PHONY : userInput.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -406,10 +406,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... taskSubscriber"
 	@echo "... taskPublisher"
-	@echo "... test_sub"
 	@echo "... edit_cache"
 	@echo "... test_pub"
-	@echo "... tableGenerator2"
+	@echo "... test_sub"
+	@echo "... userInput"
 	@echo "... Robot.o"
 	@echo "... Robot.i"
 	@echo "... Robot.s"
@@ -419,9 +419,6 @@ help:
 	@echo "... ZMQcoms.o"
 	@echo "... ZMQcoms.i"
 	@echo "... ZMQcoms.s"
-	@echo "... tableGenerator2.o"
-	@echo "... tableGenerator2.i"
-	@echo "... tableGenerator2.s"
 	@echo "... taskPublisher.o"
 	@echo "... taskPublisher.i"
 	@echo "... taskPublisher.s"
@@ -434,6 +431,9 @@ help:
 	@echo "... test_sub.o"
 	@echo "... test_sub.i"
 	@echo "... test_sub.s"
+	@echo "... userInput.o"
+	@echo "... userInput.i"
+	@echo "... userInput.s"
 .PHONY : help
 
 

@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/cagu/WMR/intern_project/summer_work
 CMakeFiles/taskSubscriber.dir/all:
 	$(MAKE) -f CMakeFiles/taskSubscriber.dir/build.make CMakeFiles/taskSubscriber.dir/depend
 	$(MAKE) -f CMakeFiles/taskSubscriber.dir/build.make CMakeFiles/taskSubscriber.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=8,9 "Built target taskSubscriber"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=3,4 "Built target taskSubscriber"
 .PHONY : CMakeFiles/taskSubscriber.dir/all
 
 # Include target in all.
@@ -103,7 +103,7 @@ clean: CMakeFiles/taskSubscriber.dir/clean
 CMakeFiles/taskPublisher.dir/all:
 	$(MAKE) -f CMakeFiles/taskPublisher.dir/build.make CMakeFiles/taskPublisher.dir/depend
 	$(MAKE) -f CMakeFiles/taskPublisher.dir/build.make CMakeFiles/taskPublisher.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=6,7 "Built target taskPublisher"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=1,2 "Built target taskPublisher"
 .PHONY : CMakeFiles/taskPublisher.dir/all
 
 # Include target in all.
@@ -134,50 +134,13 @@ clean: CMakeFiles/taskPublisher.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_sub.dir
-
-# All Build rule for target.
-CMakeFiles/test_sub.dir/all:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/depend
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=13,14,15 "Built target test_sub"
-.PHONY : CMakeFiles/test_sub.dir/all
-
-# Include target in all.
-all: CMakeFiles/test_sub.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_sub.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_sub.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 0
-.PHONY : CMakeFiles/test_sub.dir/rule
-
-# Convenience name for target.
-test_sub: CMakeFiles/test_sub.dir/rule
-
-.PHONY : test_sub
-
-# clean rule for target.
-CMakeFiles/test_sub.dir/clean:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/clean
-.PHONY : CMakeFiles/test_sub.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/test_sub.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/test_pub.dir
 
 # All Build rule for target.
 CMakeFiles/test_pub.dir/all:
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/depend
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=10,11,12 "Built target test_pub"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=5,6,7 "Built target test_pub"
 .PHONY : CMakeFiles/test_pub.dir/all
 
 # Include target in all.
@@ -208,39 +171,76 @@ clean: CMakeFiles/test_pub.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/tableGenerator2.dir
+# Target rules for target CMakeFiles/test_sub.dir
 
 # All Build rule for target.
-CMakeFiles/tableGenerator2.dir/all:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/depend
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=1,2,3,4,5 "Built target tableGenerator2"
-.PHONY : CMakeFiles/tableGenerator2.dir/all
+CMakeFiles/test_sub.dir/all:
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/depend
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=8,9,10 "Built target test_sub"
+.PHONY : CMakeFiles/test_sub.dir/all
 
 # Include target in all.
-all: CMakeFiles/tableGenerator2.dir/all
+all: CMakeFiles/test_sub.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/tableGenerator2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 5
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/tableGenerator2.dir/all
+CMakeFiles/test_sub.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_sub.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 0
-.PHONY : CMakeFiles/tableGenerator2.dir/rule
+.PHONY : CMakeFiles/test_sub.dir/rule
 
 # Convenience name for target.
-tableGenerator2: CMakeFiles/tableGenerator2.dir/rule
+test_sub: CMakeFiles/test_sub.dir/rule
 
-.PHONY : tableGenerator2
-
-# clean rule for target.
-CMakeFiles/tableGenerator2.dir/clean:
-	$(MAKE) -f CMakeFiles/tableGenerator2.dir/build.make CMakeFiles/tableGenerator2.dir/clean
-.PHONY : CMakeFiles/tableGenerator2.dir/clean
+.PHONY : test_sub
 
 # clean rule for target.
-clean: CMakeFiles/tableGenerator2.dir/clean
+CMakeFiles/test_sub.dir/clean:
+	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/clean
+.PHONY : CMakeFiles/test_sub.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/test_sub.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/userInput.dir
+
+# All Build rule for target.
+CMakeFiles/userInput.dir/all:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/depend
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cagu/WMR/intern_project/summer_work/CMakeFiles --progress-num=11,12,13,14,15 "Built target userInput"
+.PHONY : CMakeFiles/userInput.dir/all
+
+# Include target in all.
+all: CMakeFiles/userInput.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/userInput.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/userInput.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cagu/WMR/intern_project/summer_work/CMakeFiles 0
+.PHONY : CMakeFiles/userInput.dir/rule
+
+# Convenience name for target.
+userInput: CMakeFiles/userInput.dir/rule
+
+.PHONY : userInput
+
+# clean rule for target.
+CMakeFiles/userInput.dir/clean:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/clean
+.PHONY : CMakeFiles/userInput.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/userInput.dir/clean
 
 .PHONY : clean
 

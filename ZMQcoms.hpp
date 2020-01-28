@@ -30,6 +30,8 @@ class ZMQcoms{
         std::string subscribeMessage();
 
         std::string requestMessage(std::string message);
+        std::string replyWait();
+        void replyMessage(std::string message);
         ~ZMQcoms();
 };
 
