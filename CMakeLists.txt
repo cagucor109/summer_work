@@ -13,3 +13,6 @@ target_link_libraries(test_pub -lzmq)
 
 add_executable(test_sub test_sub.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp)
 target_link_libraries(test_sub -lzmq)
+
+add_executable(tableGenerator2 tableGenerator2.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(tableGenerator2 -lzmq -lsqlapi -ldl)
