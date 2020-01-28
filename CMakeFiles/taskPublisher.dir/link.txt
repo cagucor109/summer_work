@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/taskPublisher.dir/taskPublisher.cpp.o  -o taskPublisher -lzmq -lsqlapi -ldl 

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/taskSubscriber.dir/taskSubscriber.cpp.o  -o taskSubscriber -lzmq 

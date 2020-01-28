@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/test_sub.dir/test_sub.cpp.o CMakeFiles/test_sub.dir/ZMQcoms.cpp.o  -o test_sub -lzmq 
