@@ -27,11 +27,13 @@ class ZMQcoms{
         void syncSub(int port);
         
         void publishMessage(std::string topic, std::string message);
-        std::string subscribeMessage();
+        std::string subscribeMessage(int option = 1);
 
-        std::string requestMessage(std::string message);
-        std::string replyWait();
-        void replyMessage(std::string message);
+        bool requestSend(std::string message);
+        std::string requestReceive();
+
+        std::string replyReceive();
+        bool replySend(std::string message);
         ~ZMQcoms();
 };
 

@@ -83,6 +83,16 @@ s_recv (zmq::socket_t & socket) {
     return std::string(static_cast<char*>(message.data()), message.size());
 }
 
+//  Receive 0MQ string from socket and convert into string without blocking
+static std::string
+s_recv_nowait (zmq::socket_t & socket) {
+
+    zmq::message_t message;
+    socket.recv(&message, ZMQ_DONTWAIT);
+
+    return std::string(static_cast<char*>(message.data()), message.size());
+}
+
 //  Convert string to 0MQ string and send to socket
 static bool
 s_send (zmq::socket_t & socket, const std::string & string) {
@@ -91,6 +101,17 @@ s_send (zmq::socket_t & socket, const std::string & string) {
     memcpy (message.data(), string.data(), string.size());
 
     bool rc = socket.send (message);
+    return (rc);
+}
+
+//  Convert string to 0MQ string and send to socket without blocking
+static bool
+s_send_nowait (zmq::socket_t & socket, const std::string & string) {
+
+    zmq::message_t message(string.size());
+    memcpy (message.data(), string.data(), string.size());
+
+    bool rc = socket.send (message, ZMQ_DONTWAIT);
     return (rc);
 }
 

@@ -4,6 +4,7 @@ ZMQcoms::ZMQcoms(){
 
 }
 
+// Setup the socket to the pattern specified
 void ZMQcoms::setup(Pattern type, int port){
     _context = new zmq::context_t (1);
     _socket = new zmq::socket_t(*_context, type);
@@ -18,11 +19,13 @@ void ZMQcoms::setup(Pattern type, int port){
     }
 }
 
+// Setup a subscription to a topic for a SUB socket
 void ZMQcoms::subscribeToTopic(std::string topic){
     const char *filter = topic.c_str();
     (*_socket).setsockopt(ZMQ_SUBSCRIBE, filter, strlen (filter));
 }
 
+// not sure if necessary
 void ZMQcoms::syncPub(int port){
     zmq::socket_t syncservice (*_context, ZMQ_REP);
     std::stringstream ss;
@@ -37,6 +40,7 @@ void ZMQcoms::syncPub(int port){
 
 }
 
+// not sure if necessary
 void ZMQcoms::syncSub(int port){
     zmq::socket_t syncclient (*_context, ZMQ_REQ);
     std::stringstream ss;
@@ -50,29 +54,41 @@ void ZMQcoms::syncSub(int port){
     s_recv (syncclient);
 
 }
-        
+
+// publish a message to the specified topic
 void ZMQcoms::publishMessage(std::string topic, std::string message){
     s_sendmore (*_socket, topic);
-    s_send (*_socket, message);
+    s_send_nowait (*_socket, message);
 }
 
-std::string ZMQcoms::subscribeMessage(){
-    std::string topic = s_recv (*_socket);
-	std::string data = s_recv (*_socket);
-    return data;
+// receive the message from a topic
+std::string ZMQcoms::subscribeMessage(int option){
+    std::string topic = s_recv_nowait (*_socket);
+	std::string data = s_recv_nowait (*_socket);
+    if(option == 0){
+        return topic;
+    }else if(option == 1){
+        return data; // this is the default
+    }else{
+        return ""; // add error here
+    }
+    
 }
 
-std::string ZMQcoms::requestMessage(std::string message){
-    s_send(*_socket, message);
+bool ZMQcoms::requestSend(std::string message){
+    return s_send_nowait(*_socket, message);
+}
+
+std::string ZMQcoms::requestReceive(){
     return s_recv(*_socket);
 }
 
-std::string ZMQcoms::replyWait(){
-    return s_recv(*_socket);
+std::string ZMQcoms::replyReceive(){
+    return s_recv_nowait(*_socket);
 }
 
-void ZMQcoms::replyMessage(std::string message){
-    s_send(*_socket, message);
+bool ZMQcoms::replySend(std::string message){
+    return s_send(*_socket, message);
 }
 
 ZMQcoms::~ZMQcoms(){
