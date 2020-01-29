@@ -3,6 +3,7 @@
 
 CMakeFiles/userInput.dir/Robot.cpp.o: Robot.cpp
 CMakeFiles/userInput.dir/Robot.cpp.o: Robot.hpp
+CMakeFiles/userInput.dir/Robot.cpp.o: zhelpers.hpp
 
 CMakeFiles/userInput.dir/SQLAPIcoms.cpp.o: SQLAPIcoms.cpp
 CMakeFiles/userInput.dir/SQLAPIcoms.cpp.o: SQLAPIcoms.hpp

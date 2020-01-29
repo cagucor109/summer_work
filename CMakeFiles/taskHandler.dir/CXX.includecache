@@ -6,6 +6,28 @@
 
 #IncludeRegexTransform: 
 
+/home/cagu/WMR/intern_project/summer_work/Robot.cpp
+Robot.hpp
+/home/cagu/WMR/intern_project/summer_work/Robot.hpp
+
+/home/cagu/WMR/intern_project/summer_work/Robot.hpp
+cmath
+-
+zhelpers.hpp
+/home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
+
+/home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.cpp
+SQLAPIcoms.hpp
+/home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
+
+/home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
+SQLAPI.h
+-
+string
+-
+vector
+-
+
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.cpp
 ZMQcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.hpp
@@ -22,11 +44,13 @@ vector
 zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 
-/home/cagu/WMR/intern_project/summer_work/test_sub.cpp
+/home/cagu/WMR/intern_project/summer_work/taskHandler.cpp
 ZMQcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.hpp
-zmq.hpp
--
+Robot.hpp
+/home/cagu/WMR/intern_project/summer_work/Robot.hpp
+SQLAPIcoms.hpp
+/home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
 iostream
 -
 

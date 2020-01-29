@@ -4,12 +4,17 @@
 #include <zmq.hpp>
 #include <string>
 #include <sstream>
+#include <vector>
 #include "zhelpers.hpp"
 
 class ZMQcoms{
     private:
         zmq::context_t* _context;
-        zmq::socket_t* _socket;
+        // possibly make a vector of sockets to allow arbitrary amount
+        zmq::socket_t* _socketPub;
+        zmq::socket_t* _socketSub;
+        zmq::socket_t* _socketReq;
+        zmq::socket_t* _socketRep;
 
     public:
         enum Pattern{
@@ -20,14 +25,17 @@ class ZMQcoms{
         };
         ZMQcoms();
 
+        //possibly include setUp prompt
+
         void setup(Pattern type, int port);
         void subscribeToTopic(std::string topic);
+        void unsubscribeFromTopic(std::string topic);
 
         void syncPub(int port);
         void syncSub(int port);
         
         void publishMessage(std::string topic, std::string message);
-        std::string subscribeMessage(int option = 1);
+        std::vector<std::string> subscribeMessage();
 
         bool requestSend(std::string message);
         std::string requestReceive();

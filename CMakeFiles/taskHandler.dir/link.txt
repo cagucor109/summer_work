@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/taskHandler.dir/taskHandler.cpp.o CMakeFiles/taskHandler.dir/ZMQcoms.cpp.o CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.o CMakeFiles/taskHandler.dir/Robot.cpp.o  -o taskHandler -lzmq -lsqlapi -ldl 

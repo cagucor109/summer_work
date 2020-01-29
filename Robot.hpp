@@ -2,18 +2,25 @@
 #define ROBOT_HPP_
 
 #include <cmath>
+#include "zhelpers.hpp"
 
 class Robot{
+public:
+    enum Status{
+        IDLE,
+        PROCESSING,
+        ASSIGNED
+    };
+    Robot();
+    int findCompatibility(int taskID, int locationStartX, int locationEndX, int weight);
 
 private:
+    static int _robotCount;
     int _robotID;
     int _locationX;
     int _capacity;
     int _battery;
-
-public:
-    Robot();
-    int findCompatibility(int taskID, int locationStartX, int locationEndX, int weight);
+    Robot::Status _status;
 };
 
 #endif

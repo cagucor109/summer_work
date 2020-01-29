@@ -68,7 +68,7 @@ void subInterface(ZMQcoms *zmqcom){
     (*zmqcom).subscribeToTopic(topic);
     std::cout << "Successfully subscribed to " << topic << std::endl;
     while(true){
-        message = (*zmqcom).subscribeMessage();
+        message = (*zmqcom).subscribeMessage().at(1);
         sleep(2);
         // ..... Do work ..... //
         if(!message.empty()){

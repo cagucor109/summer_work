@@ -13,6 +13,8 @@ Robot.hpp
 /home/cagu/WMR/intern_project/summer_work/Robot.hpp
 cmath
 -
+zhelpers.hpp
+/home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.cpp
 SQLAPIcoms.hpp
@@ -36,6 +38,8 @@ zmq.hpp
 string
 -
 sstream
+-
+vector
 -
 zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp

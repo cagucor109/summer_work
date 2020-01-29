@@ -7,22 +7,37 @@ ZMQcoms::ZMQcoms(){
 // Setup the socket to the pattern specified
 void ZMQcoms::setup(Pattern type, int port){
     _context = new zmq::context_t (1);
-    _socket = new zmq::socket_t(*_context, type);
     std::stringstream ss;
     std::string IP = (type == REQ || type == SUB) ? "localhost":"*";
-    if(type == REQ || type == SUB){
+    if(type == REQ){
         ss << "tcp://localhost:" << port;
-        (*_socket).connect(ss.str());
-    } else{
+        _socketReq = new zmq::socket_t(*_context, type);
+        (*_socketReq).connect(ss.str());
+    }else if(type == SUB){
+        ss << "tcp://localhost:" << port;
+        _socketSub = new zmq::socket_t(*_context, type);
+        (*_socketSub).connect(ss.str());
+    }else if(type == REP){
         ss << "tcp://*:" << port;
-        (*_socket).bind(ss.str());
+        _socketRep = new zmq::socket_t(*_context, type);
+        (*_socketRep).bind(ss.str());
+    }else{
+        ss << "tcp://*:" << port;
+        _socketPub = new zmq::socket_t(*_context, type);
+        (*_socketPub).bind(ss.str());
     }
 }
 
 // Setup a subscription to a topic for a SUB socket
 void ZMQcoms::subscribeToTopic(std::string topic){
     const char *filter = topic.c_str();
-    (*_socket).setsockopt(ZMQ_SUBSCRIBE, filter, strlen (filter));
+    (*_socketSub).setsockopt(ZMQ_SUBSCRIBE, filter, strlen (filter));
+}
+
+// Remove a subscription to a topic for a SUB socket
+void ZMQcoms::unsubscribeFromTopic(std::string topic){
+    const char *filter = topic.c_str();
+    (*_socketSub).setsockopt(ZMQ_UNSUBSCRIBE, filter, strlen (filter));
 }
 
 // not sure if necessary
@@ -57,41 +72,41 @@ void ZMQcoms::syncSub(int port){
 
 // publish a message to the specified topic
 void ZMQcoms::publishMessage(std::string topic, std::string message){
-    s_sendmore (*_socket, topic);
-    s_send_nowait (*_socket, message);
+    s_sendmore (*_socketPub, topic);
+    s_send_nowait (*_socketPub, message);
 }
 
 // receive the message from a topic
-std::string ZMQcoms::subscribeMessage(int option){
-    std::string topic = s_recv_nowait (*_socket);
-	std::string data = s_recv_nowait (*_socket);
-    if(option == 0){
-        return topic;
-    }else if(option == 1){
-        return data; // this is the default
-    }else{
-        return ""; // add error here
-    }
+std::vector<std::string> ZMQcoms::subscribeMessage(){
+    std::vector<std::string> message;
+    std::string topic = s_recv_nowait (*_socketSub);
+    message.push_back(topic);
+	std::string data = s_recv_nowait (*_socketSub);
+    message.push_back(data);
     
+    return message;
 }
 
 bool ZMQcoms::requestSend(std::string message){
-    return s_send_nowait(*_socket, message);
+    return s_send_nowait(*_socketReq, message);
 }
 
 std::string ZMQcoms::requestReceive(){
-    return s_recv(*_socket);
+    return s_recv(*_socketReq);
 }
 
 std::string ZMQcoms::replyReceive(){
-    return s_recv_nowait(*_socket);
+    return s_recv_nowait(*_socketRep);
 }
 
 bool ZMQcoms::replySend(std::string message){
-    return s_send(*_socket, message);
+    return s_send(*_socketRep, message);
 }
 
 ZMQcoms::~ZMQcoms(){
     delete _context;
-    delete _socket;
+    delete _socketPub;
+    delete _socketSub;
+    delete _socketReq;
+    delete _socketRep;
 }

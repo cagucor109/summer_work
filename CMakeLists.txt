@@ -16,3 +16,9 @@ target_link_libraries(test_sub -lzmq)
 
 add_executable(userInput userInput.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
 target_link_libraries(userInput -lzmq -lsqlapi -ldl)
+
+add_executable(taskHandler taskHandler.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(taskHandler -lzmq -lsqlapi -ldl)
+
+add_executable(agv agv.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(agv -lzmq -lsqlapi -ldl)

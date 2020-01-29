@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named agv
+
+# Build rule for target.
+agv: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 agv
+.PHONY : agv
+
+# fast build rule for target.
+agv/fast:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/build
+.PHONY : agv/fast
+
+#=============================================================================
 # Target rules for targets named taskSubscriber
 
 # Build rule for target.
@@ -135,6 +148,19 @@ taskPublisher: cmake_check_build_system
 taskPublisher/fast:
 	$(MAKE) -f CMakeFiles/taskPublisher.dir/build.make CMakeFiles/taskPublisher.dir/build
 .PHONY : taskPublisher/fast
+
+#=============================================================================
+# Target rules for targets named taskHandler
+
+# Build rule for target.
+taskHandler: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 taskHandler
+.PHONY : taskHandler
+
+# fast build rule for target.
+taskHandler/fast:
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/build
+.PHONY : taskHandler/fast
 
 #=============================================================================
 # Target rules for targets named test_pub
@@ -181,6 +207,8 @@ Robot.o: Robot.cpp.o
 
 # target to build an object file
 Robot.cpp.o:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.o
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/Robot.cpp.o
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.o
 .PHONY : Robot.cpp.o
 
@@ -190,6 +218,8 @@ Robot.i: Robot.cpp.i
 
 # target to preprocess a source file
 Robot.cpp.i:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.i
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/Robot.cpp.i
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.i
 .PHONY : Robot.cpp.i
 
@@ -199,6 +229,8 @@ Robot.s: Robot.cpp.s
 
 # target to generate assembly for a file
 Robot.cpp.s:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.s
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/Robot.cpp.s
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.s
 .PHONY : Robot.cpp.s
 
@@ -208,6 +240,8 @@ SQLAPIcoms.o: SQLAPIcoms.cpp.o
 
 # target to build an object file
 SQLAPIcoms.cpp.o:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.o
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.o
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.o
 .PHONY : SQLAPIcoms.cpp.o
 
@@ -217,6 +251,8 @@ SQLAPIcoms.i: SQLAPIcoms.cpp.i
 
 # target to preprocess a source file
 SQLAPIcoms.cpp.i:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.i
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.i
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.i
 .PHONY : SQLAPIcoms.cpp.i
 
@@ -226,6 +262,8 @@ SQLAPIcoms.s: SQLAPIcoms.cpp.s
 
 # target to generate assembly for a file
 SQLAPIcoms.cpp.s:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.s
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.s
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.s
 .PHONY : SQLAPIcoms.cpp.s
 
@@ -235,6 +273,8 @@ ZMQcoms.o: ZMQcoms.cpp.o
 
 # target to build an object file
 ZMQcoms.cpp.o:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.o
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.o
@@ -246,6 +286,8 @@ ZMQcoms.i: ZMQcoms.cpp.i
 
 # target to preprocess a source file
 ZMQcoms.cpp.i:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.i
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.i
@@ -257,10 +299,66 @@ ZMQcoms.s: ZMQcoms.cpp.s
 
 # target to generate assembly for a file
 ZMQcoms.cpp.s:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.s
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.s
 .PHONY : ZMQcoms.cpp.s
+
+agv.o: agv.cpp.o
+
+.PHONY : agv.o
+
+# target to build an object file
+agv.cpp.o:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/agv.cpp.o
+.PHONY : agv.cpp.o
+
+agv.i: agv.cpp.i
+
+.PHONY : agv.i
+
+# target to preprocess a source file
+agv.cpp.i:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/agv.cpp.i
+.PHONY : agv.cpp.i
+
+agv.s: agv.cpp.s
+
+.PHONY : agv.s
+
+# target to generate assembly for a file
+agv.cpp.s:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/agv.cpp.s
+.PHONY : agv.cpp.s
+
+taskHandler.o: taskHandler.cpp.o
+
+.PHONY : taskHandler.o
+
+# target to build an object file
+taskHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/taskHandler.cpp.o
+.PHONY : taskHandler.cpp.o
+
+taskHandler.i: taskHandler.cpp.i
+
+.PHONY : taskHandler.i
+
+# target to preprocess a source file
+taskHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/taskHandler.cpp.i
+.PHONY : taskHandler.cpp.i
+
+taskHandler.s: taskHandler.cpp.s
+
+.PHONY : taskHandler.s
+
+# target to generate assembly for a file
+taskHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/taskHandler.cpp.s
+.PHONY : taskHandler.cpp.s
 
 taskPublisher.o: taskPublisher.cpp.o
 
@@ -404,9 +502,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... agv"
 	@echo "... taskSubscriber"
 	@echo "... taskPublisher"
 	@echo "... edit_cache"
+	@echo "... taskHandler"
 	@echo "... test_pub"
 	@echo "... test_sub"
 	@echo "... userInput"
@@ -419,6 +519,12 @@ help:
 	@echo "... ZMQcoms.o"
 	@echo "... ZMQcoms.i"
 	@echo "... ZMQcoms.s"
+	@echo "... agv.o"
+	@echo "... agv.i"
+	@echo "... agv.s"
+	@echo "... taskHandler.o"
+	@echo "... taskHandler.i"
+	@echo "... taskHandler.s"
 	@echo "... taskPublisher.o"
 	@echo "... taskPublisher.i"
 	@echo "... taskPublisher.s"

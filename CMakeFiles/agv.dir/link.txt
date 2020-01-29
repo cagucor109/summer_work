@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/agv.dir/agv.cpp.o CMakeFiles/agv.dir/ZMQcoms.cpp.o CMakeFiles/agv.dir/SQLAPIcoms.cpp.o CMakeFiles/agv.dir/Robot.cpp.o  -o agv -lzmq -lsqlapi -ldl 
