@@ -1,12 +1,9 @@
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/pub_sub_broker.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/rebuild_cache.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/pub_sub_test.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/agv.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/taskSubscriber.dir
+/home/cagu/WMR/intern_project/summer_work/CMakeFiles/workerHandler.dir
 /home/cagu/WMR/intern_project/summer_work/CMakeFiles/taskPublisher.dir
 /home/cagu/WMR/intern_project/summer_work/CMakeFiles/edit_cache.dir
 /home/cagu/WMR/intern_project/summer_work/CMakeFiles/taskHandler.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/test_pub.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/tableGenerator.dir
-/home/cagu/WMR/intern_project/summer_work/CMakeFiles/test_sub.dir
 /home/cagu/WMR/intern_project/summer_work/CMakeFiles/userInput.dir
+/home/cagu/WMR/intern_project/summer_work/CMakeFiles/tableGenerator.dir
+/home/cagu/WMR/intern_project/summer_work/CMakeFiles/rebuild_cache.dir
+/home/cagu/WMR/intern_project/summer_work/CMakeFiles/taskSubscriber.dir
+/home/cagu/WMR/intern_project/summer_work/CMakeFiles/agv.dir

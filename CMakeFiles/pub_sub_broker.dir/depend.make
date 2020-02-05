@@ -12,7 +12,4 @@ CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.o: ZMQcoms.cpp
 CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.o: ZMQcoms.hpp
 CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.o: zhelpers.hpp
 
-CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.o: ZMQcoms.hpp
-CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.o: pub_sub_broker.cpp
-CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.o: zhelpers.hpp
 

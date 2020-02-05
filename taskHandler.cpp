@@ -24,14 +24,16 @@ int main(int argc, char *argv[]){
     std::cin.ignore();
     std::cout << "\nDo you want to connect or bind?" << std::endl;
     std::cin >> bind_con;
-    (*zmqcom).setup(ZMQcoms::PUB, port, bind_con);
+    (*zmqcom).setUp(ZMQcoms::PUB);
+    (*zmqcom).setConnection(ZMQcoms::PUB, port, bind_con);
 
     std::cout << "\nEnter the port for the SUB socket..." << std::endl;
     std::cin >> port;
     std::cin.ignore();
     std::cout << "\nDo you want to connect or bind?" << std::endl;
     std::cin >> bind_con;
-    (*zmqcom).setup(ZMQcoms::SUB, port, bind_con);
+    (*zmqcom).setUp(ZMQcoms::SUB);
+    (*zmqcom).setConnection(ZMQcoms::SUB, port, bind_con);
     (*zmqcom).subscribeToTopic("acceptTask");
 
     std::string dBName;

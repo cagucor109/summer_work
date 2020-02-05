@@ -46,6 +46,14 @@ vector
 zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 
+/home/cagu/WMR/intern_project/summer_work/workerHandler.cpp
+iostream
+-
+SQLAPIcoms.hpp
+/home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
+ZMQcoms.hpp
+/home/cagu/WMR/intern_project/summer_work/ZMQcoms.hpp
+
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 zmq.hpp
 -

@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/cagu/WMR/intern_project/summer_work
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,56 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named pub_sub_broker
+# Target rules for targets named workerHandler
 
 # Build rule for target.
-pub_sub_broker: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pub_sub_broker
-.PHONY : pub_sub_broker
+workerHandler: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 workerHandler
+.PHONY : workerHandler
 
 # fast build rule for target.
-pub_sub_broker/fast:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/build
-.PHONY : pub_sub_broker/fast
-
-#=============================================================================
-# Target rules for targets named pub_sub_test
-
-# Build rule for target.
-pub_sub_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pub_sub_test
-.PHONY : pub_sub_test
-
-# fast build rule for target.
-pub_sub_test/fast:
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/build
-.PHONY : pub_sub_test/fast
-
-#=============================================================================
-# Target rules for targets named agv
-
-# Build rule for target.
-agv: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 agv
-.PHONY : agv
-
-# fast build rule for target.
-agv/fast:
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/build
-.PHONY : agv/fast
-
-#=============================================================================
-# Target rules for targets named taskSubscriber
-
-# Build rule for target.
-taskSubscriber: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 taskSubscriber
-.PHONY : taskSubscriber
-
-# fast build rule for target.
-taskSubscriber/fast:
-	$(MAKE) -f CMakeFiles/taskSubscriber.dir/build.make CMakeFiles/taskSubscriber.dir/build
-.PHONY : taskSubscriber/fast
+workerHandler/fast:
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/build
+.PHONY : workerHandler/fast
 
 #=============================================================================
 # Target rules for targets named taskPublisher
@@ -189,17 +150,17 @@ taskHandler/fast:
 .PHONY : taskHandler/fast
 
 #=============================================================================
-# Target rules for targets named test_pub
+# Target rules for targets named userInput
 
 # Build rule for target.
-test_pub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_pub
-.PHONY : test_pub
+userInput: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 userInput
+.PHONY : userInput
 
 # fast build rule for target.
-test_pub/fast:
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/build
-.PHONY : test_pub/fast
+userInput/fast:
+	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/build
+.PHONY : userInput/fast
 
 #=============================================================================
 # Target rules for targets named tableGenerator
@@ -215,30 +176,30 @@ tableGenerator/fast:
 .PHONY : tableGenerator/fast
 
 #=============================================================================
-# Target rules for targets named test_sub
+# Target rules for targets named taskSubscriber
 
 # Build rule for target.
-test_sub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_sub
-.PHONY : test_sub
+taskSubscriber: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 taskSubscriber
+.PHONY : taskSubscriber
 
 # fast build rule for target.
-test_sub/fast:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/build
-.PHONY : test_sub/fast
+taskSubscriber/fast:
+	$(MAKE) -f CMakeFiles/taskSubscriber.dir/build.make CMakeFiles/taskSubscriber.dir/build
+.PHONY : taskSubscriber/fast
 
 #=============================================================================
-# Target rules for targets named userInput
+# Target rules for targets named agv
 
 # Build rule for target.
-userInput: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 userInput
-.PHONY : userInput
+agv: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 agv
+.PHONY : agv
 
 # fast build rule for target.
-userInput/fast:
-	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/build
-.PHONY : userInput/fast
+agv/fast:
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/build
+.PHONY : agv/fast
 
 Robot.o: Robot.cpp.o
 
@@ -246,12 +207,11 @@ Robot.o: Robot.cpp.o
 
 # target to build an object file
 Robot.cpp.o:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/Robot.cpp.o
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/Robot.cpp.o
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.o
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/Robot.cpp.o
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/Robot.cpp.o
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/Robot.cpp.o
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.o
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/Robot.cpp.o
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.o
 .PHONY : Robot.cpp.o
 
 Robot.i: Robot.cpp.i
@@ -260,12 +220,11 @@ Robot.i: Robot.cpp.i
 
 # target to preprocess a source file
 Robot.cpp.i:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/Robot.cpp.i
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/Robot.cpp.i
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.i
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/Robot.cpp.i
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/Robot.cpp.i
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/Robot.cpp.i
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.i
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/Robot.cpp.i
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.i
 .PHONY : Robot.cpp.i
 
 Robot.s: Robot.cpp.s
@@ -274,12 +233,11 @@ Robot.s: Robot.cpp.s
 
 # target to generate assembly for a file
 Robot.cpp.s:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/Robot.cpp.s
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/Robot.cpp.s
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.s
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/Robot.cpp.s
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/Robot.cpp.s
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/Robot.cpp.s
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/Robot.cpp.s
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/Robot.cpp.s
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/Robot.cpp.s
 .PHONY : Robot.cpp.s
 
 SQLAPIcoms.o: SQLAPIcoms.cpp.o
@@ -288,12 +246,11 @@ SQLAPIcoms.o: SQLAPIcoms.cpp.o
 
 # target to build an object file
 SQLAPIcoms.cpp.o:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/SQLAPIcoms.cpp.o
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/SQLAPIcoms.cpp.o
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.o
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.o
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.o
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.o
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.o
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.o
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.o
 .PHONY : SQLAPIcoms.cpp.o
 
 SQLAPIcoms.i: SQLAPIcoms.cpp.i
@@ -302,12 +259,11 @@ SQLAPIcoms.i: SQLAPIcoms.cpp.i
 
 # target to preprocess a source file
 SQLAPIcoms.cpp.i:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/SQLAPIcoms.cpp.i
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/SQLAPIcoms.cpp.i
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.i
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.i
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.i
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.i
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.i
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.i
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.i
 .PHONY : SQLAPIcoms.cpp.i
 
 SQLAPIcoms.s: SQLAPIcoms.cpp.s
@@ -316,12 +272,11 @@ SQLAPIcoms.s: SQLAPIcoms.cpp.s
 
 # target to generate assembly for a file
 SQLAPIcoms.cpp.s:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/SQLAPIcoms.cpp.s
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/SQLAPIcoms.cpp.s
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.s
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.s
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/SQLAPIcoms.cpp.s
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.s
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/SQLAPIcoms.cpp.s
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.s
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/SQLAPIcoms.cpp.s
 .PHONY : SQLAPIcoms.cpp.s
 
 ZMQcoms.o: ZMQcoms.cpp.o
@@ -330,14 +285,11 @@ ZMQcoms.o: ZMQcoms.cpp.o
 
 # target to build an object file
 ZMQcoms.cpp.o:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.o
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/ZMQcoms.cpp.o
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.o
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/ZMQcoms.cpp.o
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.o
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.o
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.o
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.o
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.o
 .PHONY : ZMQcoms.cpp.o
 
 ZMQcoms.i: ZMQcoms.cpp.i
@@ -346,14 +298,11 @@ ZMQcoms.i: ZMQcoms.cpp.i
 
 # target to preprocess a source file
 ZMQcoms.cpp.i:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.i
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/ZMQcoms.cpp.i
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.i
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/ZMQcoms.cpp.i
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.i
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.i
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.i
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.i
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.i
 .PHONY : ZMQcoms.cpp.i
 
 ZMQcoms.s: ZMQcoms.cpp.s
@@ -362,14 +311,11 @@ ZMQcoms.s: ZMQcoms.cpp.s
 
 # target to generate assembly for a file
 ZMQcoms.cpp.s:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.s
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/ZMQcoms.cpp.s
-	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.s
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/taskHandler.dir/build.make CMakeFiles/taskHandler.dir/ZMQcoms.cpp.s
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/ZMQcoms.cpp.s
-	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.s
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/ZMQcoms.cpp.s
+	$(MAKE) -f CMakeFiles/tableGenerator.dir/build.make CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.s
+	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/ZMQcoms.cpp.s
 .PHONY : ZMQcoms.cpp.s
 
 agv.o: agv.cpp.o
@@ -398,60 +344,6 @@ agv.s: agv.cpp.s
 agv.cpp.s:
 	$(MAKE) -f CMakeFiles/agv.dir/build.make CMakeFiles/agv.dir/agv.cpp.s
 .PHONY : agv.cpp.s
-
-pub_sub_broker.o: pub_sub_broker.cpp.o
-
-.PHONY : pub_sub_broker.o
-
-# target to build an object file
-pub_sub_broker.cpp.o:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.o
-.PHONY : pub_sub_broker.cpp.o
-
-pub_sub_broker.i: pub_sub_broker.cpp.i
-
-.PHONY : pub_sub_broker.i
-
-# target to preprocess a source file
-pub_sub_broker.cpp.i:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.i
-.PHONY : pub_sub_broker.cpp.i
-
-pub_sub_broker.s: pub_sub_broker.cpp.s
-
-.PHONY : pub_sub_broker.s
-
-# target to generate assembly for a file
-pub_sub_broker.cpp.s:
-	$(MAKE) -f CMakeFiles/pub_sub_broker.dir/build.make CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.s
-.PHONY : pub_sub_broker.cpp.s
-
-pub_sub_test.o: pub_sub_test.cpp.o
-
-.PHONY : pub_sub_test.o
-
-# target to build an object file
-pub_sub_test.cpp.o:
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/pub_sub_test.cpp.o
-.PHONY : pub_sub_test.cpp.o
-
-pub_sub_test.i: pub_sub_test.cpp.i
-
-.PHONY : pub_sub_test.i
-
-# target to preprocess a source file
-pub_sub_test.cpp.i:
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/pub_sub_test.cpp.i
-.PHONY : pub_sub_test.cpp.i
-
-pub_sub_test.s: pub_sub_test.cpp.s
-
-.PHONY : pub_sub_test.s
-
-# target to generate assembly for a file
-pub_sub_test.cpp.s:
-	$(MAKE) -f CMakeFiles/pub_sub_test.dir/build.make CMakeFiles/pub_sub_test.dir/pub_sub_test.cpp.s
-.PHONY : pub_sub_test.cpp.s
 
 tableGenerator.o: tableGenerator.cpp.o
 
@@ -561,60 +453,6 @@ taskSubscriber.cpp.s:
 	$(MAKE) -f CMakeFiles/taskSubscriber.dir/build.make CMakeFiles/taskSubscriber.dir/taskSubscriber.cpp.s
 .PHONY : taskSubscriber.cpp.s
 
-test_pub.o: test_pub.cpp.o
-
-.PHONY : test_pub.o
-
-# target to build an object file
-test_pub.cpp.o:
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/test_pub.cpp.o
-.PHONY : test_pub.cpp.o
-
-test_pub.i: test_pub.cpp.i
-
-.PHONY : test_pub.i
-
-# target to preprocess a source file
-test_pub.cpp.i:
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/test_pub.cpp.i
-.PHONY : test_pub.cpp.i
-
-test_pub.s: test_pub.cpp.s
-
-.PHONY : test_pub.s
-
-# target to generate assembly for a file
-test_pub.cpp.s:
-	$(MAKE) -f CMakeFiles/test_pub.dir/build.make CMakeFiles/test_pub.dir/test_pub.cpp.s
-.PHONY : test_pub.cpp.s
-
-test_sub.o: test_sub.cpp.o
-
-.PHONY : test_sub.o
-
-# target to build an object file
-test_sub.cpp.o:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/test_sub.cpp.o
-.PHONY : test_sub.cpp.o
-
-test_sub.i: test_sub.cpp.i
-
-.PHONY : test_sub.i
-
-# target to preprocess a source file
-test_sub.cpp.i:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/test_sub.cpp.i
-.PHONY : test_sub.cpp.i
-
-test_sub.s: test_sub.cpp.s
-
-.PHONY : test_sub.s
-
-# target to generate assembly for a file
-test_sub.cpp.s:
-	$(MAKE) -f CMakeFiles/test_sub.dir/build.make CMakeFiles/test_sub.dir/test_sub.cpp.s
-.PHONY : test_sub.cpp.s
-
 userInput.o: userInput.cpp.o
 
 .PHONY : userInput.o
@@ -642,24 +480,48 @@ userInput.cpp.s:
 	$(MAKE) -f CMakeFiles/userInput.dir/build.make CMakeFiles/userInput.dir/userInput.cpp.s
 .PHONY : userInput.cpp.s
 
+workerHandler.o: workerHandler.cpp.o
+
+.PHONY : workerHandler.o
+
+# target to build an object file
+workerHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/workerHandler.cpp.o
+.PHONY : workerHandler.cpp.o
+
+workerHandler.i: workerHandler.cpp.i
+
+.PHONY : workerHandler.i
+
+# target to preprocess a source file
+workerHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/workerHandler.cpp.i
+.PHONY : workerHandler.cpp.i
+
+workerHandler.s: workerHandler.cpp.s
+
+.PHONY : workerHandler.s
+
+# target to generate assembly for a file
+workerHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/workerHandler.cpp.s
+.PHONY : workerHandler.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... pub_sub_broker"
-	@echo "... rebuild_cache"
-	@echo "... pub_sub_test"
-	@echo "... agv"
-	@echo "... taskSubscriber"
+	@echo "... workerHandler"
 	@echo "... taskPublisher"
 	@echo "... edit_cache"
 	@echo "... taskHandler"
-	@echo "... test_pub"
-	@echo "... tableGenerator"
-	@echo "... test_sub"
 	@echo "... userInput"
+	@echo "... tableGenerator"
+	@echo "... rebuild_cache"
+	@echo "... taskSubscriber"
+	@echo "... agv"
 	@echo "... Robot.o"
 	@echo "... Robot.i"
 	@echo "... Robot.s"
@@ -672,12 +534,6 @@ help:
 	@echo "... agv.o"
 	@echo "... agv.i"
 	@echo "... agv.s"
-	@echo "... pub_sub_broker.o"
-	@echo "... pub_sub_broker.i"
-	@echo "... pub_sub_broker.s"
-	@echo "... pub_sub_test.o"
-	@echo "... pub_sub_test.i"
-	@echo "... pub_sub_test.s"
 	@echo "... tableGenerator.o"
 	@echo "... tableGenerator.i"
 	@echo "... tableGenerator.s"
@@ -690,15 +546,12 @@ help:
 	@echo "... taskSubscriber.o"
 	@echo "... taskSubscriber.i"
 	@echo "... taskSubscriber.s"
-	@echo "... test_pub.o"
-	@echo "... test_pub.i"
-	@echo "... test_pub.s"
-	@echo "... test_sub.o"
-	@echo "... test_sub.i"
-	@echo "... test_sub.s"
 	@echo "... userInput.o"
 	@echo "... userInput.i"
 	@echo "... userInput.s"
+	@echo "... workerHandler.o"
+	@echo "... workerHandler.i"
+	@echo "... workerHandler.s"
 .PHONY : help
 
 

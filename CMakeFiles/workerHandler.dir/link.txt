@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/workerHandler.dir/workerHandler.cpp.o CMakeFiles/workerHandler.dir/ZMQcoms.cpp.o CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.o CMakeFiles/workerHandler.dir/Robot.cpp.o  -o workerHandler -lzmq -lsqlapi -ldl 

@@ -30,7 +30,8 @@ int main(int argc, char *argv[]){
     std::cout << "\nDo you want to connect or bind?" << std::endl;
     std::cin >> bind_con;
 
-    (*zmqcom).setup(pattern, port, bind_con);
+    (*zmqcom).setUp(pattern);
+    (*zmqcom).setConnection(pattern, port, bind_con);
     std::cout << "Setup success!" << std::endl;
 
     if(pattern == ZMQcoms::PUB){
