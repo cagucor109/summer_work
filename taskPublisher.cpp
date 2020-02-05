@@ -78,8 +78,8 @@ int main () {
             con.Commit();
 
             //  Send message to all subscribers
-            s_sendmore (publisher, TOPIC);
-            s_send (publisher, ss.str());
+            //s_sendmore (publisher, TOPIC);
+            //s_send (publisher, ss.str());
 
             sleep(1);
         }
@@ -91,9 +91,6 @@ int main () {
         con.Rollback();
         printf("%s\n", (const char*)x.ErrText());
     }
-
-    publisher.close();
-    context.close();
 
     return 0;
 }

@@ -22,3 +22,12 @@ target_link_libraries(taskHandler -lzmq -lsqlapi -ldl)
 
 add_executable(agv agv.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
 target_link_libraries(agv -lzmq -lsqlapi -ldl)
+
+add_executable(tableGenerator tableGenerator.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(tableGenerator -lzmq -lsqlapi -ldl)
+
+add_executable(pub_sub_test pub_sub_test.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(pub_sub_test -lzmq -lsqlapi -ldl)
+
+add_executable(pub_sub_broker pub_sub_broker.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(pub_sub_broker -lzmq -lsqlapi -ldl)

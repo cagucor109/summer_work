@@ -4,7 +4,7 @@
 #include <iostream>
 
 std::string createRandomTask(ZMQcoms *com);
-void updateTasksTable(std::string task);
+void updateTasksTable(SQLAPIcoms *com, std::string task);
 
 int main(int argc, char *argv[]){
 
@@ -17,26 +17,51 @@ int main(int argc, char *argv[]){
     std::cout << "The acceptTask topic is subscribed to by default" << std::endl;
 
     int port;
+    std::string bind_con;
 
-    std::cout << "\nEnter the port to bind the PUB socket..." << std::endl;
+    std::cout << "\nEnter the port for the PUB socket..." << std::endl;
     std::cin >> port;
     std::cin.ignore();
-    (*zmqcom).setup(ZMQcoms::PUB, port);
+    std::cout << "\nDo you want to connect or bind?" << std::endl;
+    std::cin >> bind_con;
+    (*zmqcom).setup(ZMQcoms::PUB, port, bind_con);
 
-    std::cout << "\nEnter the port to connect the SUB socket..." << std::endl;
+    std::cout << "\nEnter the port for the SUB socket..." << std::endl;
     std::cin >> port;
     std::cin.ignore();
-    (*zmqcom).setup(ZMQcoms::SUB, port);
+    std::cout << "\nDo you want to connect or bind?" << std::endl;
+    std::cin >> bind_con;
+    (*zmqcom).setup(ZMQcoms::SUB, port, bind_con);
     (*zmqcom).subscribeToTopic("acceptTask");
 
-    std::cout << "Setup success!" << std::endl;
+    std::string dBName;
+    std::string user;
+    std::string pwd;
 
-    while(true){
-        std::string newTask;
-        newTask = createRandomTask(zmqcom);
-        updateTasksTable(newTask);
-        sleep(3);
+    std::cout <<"Enter database name to connect to..." << std::endl;
+    std::cin >> dBName;
+    std::cout <<"Enter username to connect with..." << std::endl;
+    std::cin >> user;
+    std::cout <<"Enter password..." << std::endl;
+    std::cin >> pwd;
 
+    try{
+
+        (*sqlcom).connectToDB(dBName, user, pwd);
+
+        std::cout << "Setup success!" << std::endl;
+
+        while(true){
+            std::string newTask;
+            newTask = createRandomTask(zmqcom);
+            updateTasksTable(sqlcom, newTask);
+            sleep(5);
+
+        }
+
+    }
+    catch(SAException &x){
+        printf("%s\n", (const char*)x.ErrText());
     }
 
     return 0;
@@ -64,14 +89,23 @@ std::string createRandomTask(ZMQcoms *com){
     return ss.str();
 }
 
-void updateTasksTable(std::string task){
+void updateTasksTable(SQLAPIcoms *com, std::string task){
     if(!task.empty()){
+        std::vector<int> tableUpdate;
         std::stringstream ss;
         int taskID, locationStartX, locationEndX, weight, availability;
         ss << task;
         ss >> taskID >> locationStartX >> locationEndX >> weight >> availability;
+        tableUpdate.push_back(taskID);
+        tableUpdate.push_back(locationStartX);
+        tableUpdate.push_back(locationEndX);
+        tableUpdate.push_back(weight);
+        tableUpdate.push_back(availability);
         std::cout << "Updating table with: " << std::endl;
         std::cout << taskID << " " << locationStartX  << " " << locationEndX  << " " << weight  << " " << availability << std::endl;
+
+        (*com).insertIntoTasks(tableUpdate);
+
     
     }
 }

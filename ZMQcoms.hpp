@@ -27,7 +27,7 @@ class ZMQcoms{
 
         //possibly include setUp prompt
 
-        void setup(Pattern type, int port);
+        void setup(Pattern type, int port, std::string bind_con);
         void subscribeToTopic(std::string topic);
         void unsubscribeFromTopic(std::string topic);
 

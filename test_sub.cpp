@@ -5,7 +5,7 @@
 int main(){
 
     ZMQcoms *com = new ZMQcoms();
-    (*com).setup(ZMQcoms::SUB, 5555);
+    (*com).setup(ZMQcoms::SUB, 5555, "bind");
     (*com).subscribeToTopic("hello");
     std::cout << (*com).subscribeMessage().at(1);
     

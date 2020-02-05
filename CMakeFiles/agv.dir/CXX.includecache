@@ -27,6 +27,8 @@ string
 -
 vector
 -
+stdio.h
+-
 
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.cpp
 ZMQcoms.hpp
@@ -50,6 +52,8 @@ ZMQcoms.hpp
 Robot.hpp
 /home/cagu/WMR/intern_project/summer_work/Robot.hpp
 iostream
+-
+algorithm
 -
 
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp

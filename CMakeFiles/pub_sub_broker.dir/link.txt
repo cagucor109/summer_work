@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/pub_sub_broker.dir/pub_sub_broker.cpp.o CMakeFiles/pub_sub_broker.dir/ZMQcoms.cpp.o CMakeFiles/pub_sub_broker.dir/SQLAPIcoms.cpp.o CMakeFiles/pub_sub_broker.dir/Robot.cpp.o  -o pub_sub_broker -lzmq -lsqlapi -ldl 

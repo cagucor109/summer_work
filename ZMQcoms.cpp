@@ -5,26 +5,39 @@ ZMQcoms::ZMQcoms(){
 }
 
 // Setup the socket to the pattern specified
-void ZMQcoms::setup(Pattern type, int port){
+void ZMQcoms::setup(Pattern type, int port, std::string bind_con){
     _context = new zmq::context_t (1);
     std::stringstream ss;
-    std::string IP = (type == REQ || type == SUB) ? "localhost":"*";
+    std::string IP = (bind_con == "connect") ? "localhost":"*";
+    ss << "tcp://" << IP << ":" << port;
     if(type == REQ){
-        ss << "tcp://localhost:" << port;
         _socketReq = new zmq::socket_t(*_context, type);
-        (*_socketReq).connect(ss.str());
+        if(bind_con == "connect"){
+            (*_socketReq).connect(ss.str());
+        }else{
+            (*_socketReq).bind(ss.str());
+        }
     }else if(type == SUB){
-        ss << "tcp://localhost:" << port;
         _socketSub = new zmq::socket_t(*_context, type);
-        (*_socketSub).connect(ss.str());
+        if(bind_con == "connect"){
+            (*_socketSub).connect(ss.str());
+        }else{
+            (*_socketSub).bind(ss.str());
+        }
     }else if(type == REP){
-        ss << "tcp://*:" << port;
         _socketRep = new zmq::socket_t(*_context, type);
-        (*_socketRep).bind(ss.str());
+        if(bind_con == "connect"){
+            (*_socketRep).connect(ss.str());
+        }else{
+            (*_socketRep).bind(ss.str());
+        }
     }else{
-        ss << "tcp://*:" << port;
         _socketPub = new zmq::socket_t(*_context, type);
-        (*_socketPub).bind(ss.str());
+        if(bind_con == "connect"){
+            (*_socketPub).connect(ss.str());
+        }else{
+            (*_socketPub).bind(ss.str());
+        }
     }
 }
 

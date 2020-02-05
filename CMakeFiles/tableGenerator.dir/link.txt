@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/tableGenerator.dir/tableGenerator.cpp.o CMakeFiles/tableGenerator.dir/ZMQcoms.cpp.o CMakeFiles/tableGenerator.dir/SQLAPIcoms.cpp.o CMakeFiles/tableGenerator.dir/Robot.cpp.o  -o tableGenerator -lzmq -lsqlapi -ldl 

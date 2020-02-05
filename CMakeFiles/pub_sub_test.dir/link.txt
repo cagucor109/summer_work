@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/pub_sub_test.dir/pub_sub_test.cpp.o CMakeFiles/pub_sub_test.dir/ZMQcoms.cpp.o CMakeFiles/pub_sub_test.dir/SQLAPIcoms.cpp.o CMakeFiles/pub_sub_test.dir/Robot.cpp.o  -o pub_sub_test -lzmq -lsqlapi -ldl 

@@ -17,6 +17,7 @@ int main(int argc, char *argv[]){
     std::cout << "1: PUB\n2: SUB\n3: REQ\n4: REP" << std::endl;
 
     int type;
+    std::string bind_con;
     std::cin >> type;
 
     ZMQcoms::Pattern pattern = (ZMQcoms::Pattern)type;
@@ -26,8 +27,10 @@ int main(int argc, char *argv[]){
     int port;
     std::cin >> port;
     std::cin.ignore();
+    std::cout << "\nDo you want to connect or bind?" << std::endl;
+    std::cin >> bind_con;
 
-    (*zmqcom).setup(pattern, port);
+    (*zmqcom).setup(pattern, port, bind_con);
     std::cout << "Setup success!" << std::endl;
 
     if(pattern == ZMQcoms::PUB){

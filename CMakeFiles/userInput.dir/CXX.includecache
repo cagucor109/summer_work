@@ -27,6 +27,8 @@ string
 -
 vector
 -
+stdio.h
+-
 
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.cpp
 ZMQcoms.hpp

@@ -1,7 +1,17 @@
 #include "SQLAPIcoms.hpp"
 
 SQLAPIcoms::SQLAPIcoms(){
+    _con = new SAConnection();
+    _cmd = new SACommand();
+}
 
+void SQLAPIcoms::connectToDB(std::string dB, std::string user, std::string pwd){
+    SAString dBname = dB.c_str();
+    SAString username = user.c_str();
+    SAString password = pwd.c_str();
+    (*_con).Connect(dBname, username, password, SA_MySQL_Client);
+    printf("\nWe are connected to database!\n");
+    (*_cmd).setConnection(_con);
 }
 
 void SQLAPIcoms::insertIntoTasks(std::vector<int> values){
