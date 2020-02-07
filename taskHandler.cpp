@@ -3,111 +3,90 @@
 #include "SQLAPIcoms.hpp"
 #include <iostream>
 
-std::string createRandomTask(ZMQcoms *com);
-void updateTasksTable(SQLAPIcoms *com, std::string task);
+std::string createTask(ZMQcoms *com, std::string mode);
+std::string updateTasksTable(SQLAPIcoms *com, std::string task);
 
 int main(int argc, char *argv[]){
+
+    srand(time(NULL));
 
     ZMQcoms *zmqcom = new ZMQcoms();
     SQLAPIcoms *sqlcom = new SQLAPIcoms();
     Robot *agv = new Robot();
 
-    std::cout << "This instance launches PUB and SUB sockets by default" << std::endl;
-    std::cout << "The newTask topic is reserved for new tasks" << std::endl;
-    std::cout << "The acceptTask topic is subscribed to by default" << std::endl;
+    (*zmqcom).setUpPrompt();
+    (*sqlcom).connectToDBPrompt();
 
-    int port;
-    std::string bind_con;
+    std::string mode;
 
-    std::cout << "\nEnter the port for the PUB socket..." << std::endl;
-    std::cin >> port;
-    std::cin.ignore();
-    std::cout << "\nDo you want to connect or bind?" << std::endl;
-    std::cin >> bind_con;
-    (*zmqcom).setUp(ZMQcoms::PUB);
-    (*zmqcom).setConnection(ZMQcoms::PUB, port, bind_con);
+    std::cout << "Do you want to manually, or automatically generate new tasks?" << std::endl;
+    std::cin >> mode;
 
-    std::cout << "\nEnter the port for the SUB socket..." << std::endl;
-    std::cin >> port;
-    std::cin.ignore();
-    std::cout << "\nDo you want to connect or bind?" << std::endl;
-    std::cin >> bind_con;
-    (*zmqcom).setUp(ZMQcoms::SUB);
-    (*zmqcom).setConnection(ZMQcoms::SUB, port, bind_con);
-    (*zmqcom).subscribeToTopic("acceptTask");
-
-    std::string dBName;
-    std::string user;
-    std::string pwd;
-
-    std::cout <<"Enter database name to connect to..." << std::endl;
-    std::cin >> dBName;
-    std::cout <<"Enter username to connect with..." << std::endl;
-    std::cin >> user;
-    std::cout <<"Enter password..." << std::endl;
-    std::cin >> pwd;
-
-    try{
-
-        (*sqlcom).connectToDB(dBName, user, pwd);
-
-        std::cout << "Setup success!" << std::endl;
-
-        while(true){
-            std::string newTask;
-            newTask = createRandomTask(zmqcom);
-            updateTasksTable(sqlcom, newTask);
-            sleep(5);
-
-        }
-
+    std::string newTask, newTaskID;
+    while(true){
+        newTask = createTask(zmqcom, mode);
+        newTaskID = updateTasksTable(sqlcom, newTask);
+        (*zmqcom).publishMessage("newTask", newTaskID + " " + newTask);
+        std::cout << "Sending: newTask " << newTaskID + " " + newTask << std::endl;
+        sleep(5);
     }
-    catch(SAException &x){
-        printf("%s\n", (const char*)x.ErrText());
-    }
+    
 
     return 0;
 }
 
-std::string createRandomTask(ZMQcoms *com){
-
-    int taskID, locationStartX, locationEndX, weight, availability;
-
-    //  Get values that will fool the boss
-    taskID          = within (100);
-    locationStartX  = within (10);
-    locationEndX    = within (10);
-    weight          = within (5);
-    availability    = 0;
-
+std::string createTask(ZMQcoms *com, std::string mode){
     std::stringstream ss;
-    ss << taskID << " " << locationStartX  << " " << locationEndX  << " " << weight  << " " << availability;
-
-    printf("Sending taskID: %d, locationStartX: %d, locationEndX: %d, weight: %d, availability: %d \n", taskID, locationStartX, locationEndX, weight, availability);
-    
-     //  Send message to all subscribers
-    (*com).publishMessage("newTask", ss.str());
+    int locationStartX, locationStartY, locationEndX, locationEndY, weight;
+    if(mode == "manual"){
+        std::cout << "Enter the value for the following fields..." << std::endl;
+        printf("X Start location(0 - 9):\t");
+        std::cin >> locationStartX;
+        printf("Y Start location(0 - 9):\t");
+        std::cin >> locationStartY;
+        printf("X End location(0 - 9):\t");
+        std::cin >> locationEndX;
+        printf("Y End location(0 - 9):\t");
+        std::cin >> locationEndY;
+        printf("Weight(2 - 5):\t");
+        std::cin >> weight;
+    }else if(mode == "automatic"){
+        locationStartX = rand() % 10;
+        locationStartY = rand() % 10;
+        locationEndX = rand() % 10;
+        locationEndY = rand() % 10;
+        weight = rand() % 3 + 2;
+    }else{
+        // TODO: ADD ERROR HANDLING HERE
+    }
+    ss << locationStartX << " " << locationStartY << " " << locationEndX << " "
+        << locationEndY << " " << weight;
 
     return ss.str();
+
 }
 
-void updateTasksTable(SQLAPIcoms *com, std::string task){
+std::string updateTasksTable(SQLAPIcoms *sqlcom, std::string task){
+
+    task = task + " ";
+                
+    std::vector<int> values;
+    std::string delimiter = " ";
+
+    size_t pos = 0;
+    std::string token;
+
     if(!task.empty()){
-        std::vector<int> tableUpdate;
-        std::stringstream ss;
-        int taskID, locationStartX, locationEndX, weight, availability;
-        ss << task;
-        ss >> taskID >> locationStartX >> locationEndX >> weight >> availability;
-        tableUpdate.push_back(taskID);
-        tableUpdate.push_back(locationStartX);
-        tableUpdate.push_back(locationEndX);
-        tableUpdate.push_back(weight);
-        tableUpdate.push_back(availability);
-        std::cout << "Updating table with: " << std::endl;
-        std::cout << taskID << " " << locationStartX  << " " << locationEndX  << " " << weight  << " " << availability << std::endl;
+        // Split the remainder of the string
+        while ((pos = task.find(delimiter)) != std::string::npos) {
+            token = task.substr(0, pos);
+            values.push_back(std::stoi(token));
+            task.erase(0, pos + delimiter.length());
+        }
 
-        (*com).insertIntoTasks(tableUpdate);
+        (*sqlcom).insertIntoTasks(values);
 
-    
+        return std::to_string((*sqlcom).getNewID()); 
     }
+
 }

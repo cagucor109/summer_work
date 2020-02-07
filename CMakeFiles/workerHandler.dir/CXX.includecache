@@ -15,6 +15,10 @@ cmath
 -
 zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
+cstdlib
+-
+ctime
+-
 
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.cpp
 SQLAPIcoms.hpp
@@ -28,6 +32,8 @@ string
 vector
 -
 stdio.h
+-
+iostream
 -
 
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.cpp

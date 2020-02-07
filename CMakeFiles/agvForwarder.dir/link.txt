@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/agvForwarder.dir/agvForwarder.cpp.o CMakeFiles/agvForwarder.dir/ZMQcoms.cpp.o CMakeFiles/agvForwarder.dir/SQLAPIcoms.cpp.o CMakeFiles/agvForwarder.dir/Robot.cpp.o  -o agvForwarder -lzmq -lsqlapi -ldl 

@@ -42,6 +42,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/agvForwarder.dir/DependInfo.cmake"
   "CMakeFiles/workerHandler.dir/DependInfo.cmake"
   "CMakeFiles/taskPublisher.dir/DependInfo.cmake"
   "CMakeFiles/taskHandler.dir/DependInfo.cmake"

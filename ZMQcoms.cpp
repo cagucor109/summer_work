@@ -96,30 +96,63 @@ void ZMQcoms::setUpPrompt(){
         }
     }
     std::cout << "\nSocket type input finished!" << std::endl;
-    std::cout << "\nPlease enter the desired port followed by connect or bind for each socket type chosen...\n" << std::endl;
+    std::cout << "\nPlease enter the desired port(s) followed by connect or bind for each socket type chosen...\n" << std::endl;
 
     int port;
     std::string bind_con;
 
     for(int i = 0; i < sockets.size(); i++){
-        std::cout << sockets.at(i) << ": " << std::endl;
-        printf("Port number:\t");
-        std::cin >> port;
-        printf("Connect or bind:\t");
-        std::cin >> bind_con;
+        while(true){
+            std::cout << sockets.at(i) << ": " << std::endl;
+            printf("Port number:\t\t");
+            std::cin >> port;
+            printf("Connect or bind:\t");
+            std::cin >> bind_con;
 
-        if( sockets.at(i) == "Publisher" ){
-            type = ZMQcoms::Pattern::PUB;
-        }else if( sockets.at(i) == "Subscriber" ){
-            type = ZMQcoms::Pattern::SUB;
-        }else if( sockets.at(i) == "Requester" ){
-            type = ZMQcoms::Pattern::REQ;
-        }else{
-            type = ZMQcoms::Pattern::REP;
+            if( sockets.at(i) == "Publisher" ){
+                type = ZMQcoms::Pattern::PUB;
+            }else if( sockets.at(i) == "Subscriber" ){
+                type = ZMQcoms::Pattern::SUB;
+                std::string topic;
+                std::string answer;
+                std::cout << "\nPlease enter the topics you want to subscribe to..." << std::endl;
+                std::cout << "Input space to subscribe to all topics...\n" << std::endl;
+                while(true){
+                    printf("Topic:\t");
+                    std::cin >> topic;
+                    std::cin.ignore();
+                    subscribeToTopic(topic);
+                    std::cout << "\nWould you like to subscribe to another topic?" << std::endl;
+                    printf("yes(y) or no(n):\t");
+                    std::cin >> answer;
+                    if(answer == "yes" || answer == "y"){
+                        continue;
+                    }else if(answer == "no" || answer == "n"){
+                        break;
+                    }else{
+                        std::cout << "Input not recognised, assumed as yes..." << std::endl;
+                    }
+                }
+                std::cout << "\nSubscription of topics finished!\n" << std::endl;
+            }else if( sockets.at(i) == "Requester" ){
+                type = ZMQcoms::Pattern::REQ;
+            }else{
+                type = ZMQcoms::Pattern::REP;
+            }
+
+            this->setConnection(type, port, bind_con);
+            std::cout << "\nConnection set successfully!\n" << std::endl;
+            std::cout << "\nDo you want to connect to another port?" << std::endl;
+            printf("yes(y) or no(n): ");
+            std::string answer;
+            std::cin >> answer;
+            if(answer == "n" || answer == "no"){
+                break;
+            }else{
+                continue;
+            }
         }
-
-        this->setConnection(type, port, bind_con);
-        std::cout << "\nConnection set successfully!\n" << std::endl;
+        
     }
 
     std::cout << "Setup finished for the ZMQ interface!" << std::endl;
@@ -177,10 +210,16 @@ void ZMQcoms::publishMessage(std::string topic, std::string message){
 std::vector<std::string> ZMQcoms::subscribeMessage(){
     std::vector<std::string> message;
     std::string topic = s_recv_nowait (*_socketSub);
-    message.push_back(topic);
-	std::string data = s_recv_nowait (*_socketSub);
-    message.push_back(data);
+    // nested if statements to ensure correct order of topic and data
+    if(!topic.empty()){
+        message.push_back(topic);
+        std::string data = s_recv_nowait (*_socketSub);
+        if(!data.empty()){
+            message.push_back(data);
+        }
+    }
     
+
     return message;
 }
 
