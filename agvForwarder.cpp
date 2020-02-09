@@ -2,28 +2,39 @@
     The forwarder allows agvs to communicate to other agvs by forwarding messages
     Receive messages from multiple publishers and forwards to multiple subscribers
 */
-#include "ZMQcoms.hpp"
+#include "ZMQcoms.hpp" // replace with zmq.hpp i.e. decouple
 #include <iostream>
 #include <algorithm>
 
 int main(int argc, char *argv[]){
 
-    ZMQcoms *zmqcom = new ZMQcoms();
+    zmq::context_t context (1);
 
-    std::cout << "A forwarder should have at least one SUB and one PUB sockets..." << std::endl;
+    // PUB socket is the backend, sends messages to agvs
+    zmq::socket_t pubSoc (context, ZMQ_PUB);
+    pubSoc.bind("tcp://*:5553");
 
-    (*zmqcom).setUpPrompt();
+    // SUB socket is the front end, receives messages from agvs
+    zmq::socket_t subSoc (context, ZMQ_SUB);
+    subSoc.bind("tcp://*:5552");
 
-    std::vector<std::string> message;
+    // subscribe to all topics (just forwards them)
+    subSoc.setsockopt(ZMQ_SUBSCRIBE, "", 0);
+    
+
+    std::string topic, data;
 
     while(true){
 
-        // receive the message
-        message = (*zmqcom).subscribeMessage();
-        if(message.size() > 0){
-            // forward message
-            std::cout << "Received: " << message.at(0) << "\t" << message.at(1) << std::endl;
-            (*zmqcom).publishMessage(message.at(0), message.at(1));
+        // receive message on the sub socket
+        topic = s_recv_nowait (subSoc);
+        if(!topic.empty()){
+            data = s_recv_nowait (subSoc);
+
+            std::cout << "Received: " << topic << "\t" << data <<std::endl;
+            // publish message
+            s_sendmore(pubSoc, topic);
+            s_send_nowait(pubSoc, data);
         }
 
     }

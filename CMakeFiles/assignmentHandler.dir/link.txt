@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/assignmentHandler.dir/assignmentHandler.cpp.o CMakeFiles/assignmentHandler.dir/ZMQcoms.cpp.o CMakeFiles/assignmentHandler.dir/SQLAPIcoms.cpp.o CMakeFiles/assignmentHandler.dir/Robot.cpp.o  -o assignmentHandler -lzmq -lsqlapi -ldl 

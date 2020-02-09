@@ -56,13 +56,11 @@ vector
 zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 
-/home/cagu/WMR/intern_project/summer_work/userInput.cpp
+/home/cagu/WMR/intern_project/summer_work/assignmentHandler.cpp
 ZMQcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.hpp
 SQLAPIcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
-Robot.hpp
-/home/cagu/WMR/intern_project/summer_work/Robot.hpp
 iostream
 -
 

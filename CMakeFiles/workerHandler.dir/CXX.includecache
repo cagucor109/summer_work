@@ -19,6 +19,8 @@ cstdlib
 -
 ctime
 -
+utility
+-
 
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.cpp
 SQLAPIcoms.hpp
@@ -34,6 +36,8 @@ vector
 stdio.h
 -
 iostream
+-
+sstream
 -
 
 /home/cagu/WMR/intern_project/summer_work/ZMQcoms.cpp
@@ -54,6 +58,8 @@ zhelpers.hpp
 
 /home/cagu/WMR/intern_project/summer_work/workerHandler.cpp
 iostream
+-
+typeinfo
 -
 SQLAPIcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp

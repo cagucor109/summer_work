@@ -17,21 +17,30 @@
 #include <algorithm>
 
 std::vector<int> bidForTask(Robot *agv, std::string info);
+bool receiveBids(Robot *agv, std::string bid);
 
 int main(int argc, char *argv[]){
 
-    ZMQcoms *zmqcom = new ZMQcoms();
     Robot *agv = new Robot("Simulation");
 
-    std::cout << "Robot ID: " << (*agv).getRobotID() << std::endl;
-    std::cout << "X location: " << (*agv).getLocationX() << std::endl;
-    std::cout << "Y location: " << (*agv).getLocationY() << std::endl;
-    std::cout << "Capacity: " << (*agv).getCapacity() << std::endl;
-    std::cout << "Battery: " << (*agv).getBattery() << std::endl;
+    zmq::context_t context (1);
 
-    std::cout << "For an agv, it is recommended to have all sockets active!" << std::endl;
+    zmq::socket_t reqSocJoin(context, ZMQ_REQ);
+    reqSocJoin.connect("tcp://localhost:5550");
 
-    (*zmqcom).setUpPrompt();
+    zmq::socket_t reqSocAssign(context, ZMQ_REQ);
+    reqSocAssign.connect("tcp://localhost:5554");
+
+    zmq::socket_t subSocTask(context, ZMQ_SUB);
+    subSocTask.connect("tcp://localhost:5551");
+    subSocTask.setsockopt(ZMQ_SUBSCRIBE, "newTask", 7);
+
+    zmq::socket_t subSocFwd(context, ZMQ_SUB);
+    subSocFwd.connect("tcp://localhost:5553");
+    subSocFwd.setsockopt(ZMQ_SUBSCRIBE, "newBid", 6);
+
+    zmq::socket_t pubSoc(context, ZMQ_PUB);
+    pubSoc.connect("tcp://localhost:5552");
 
     // join topology
 
@@ -40,30 +49,53 @@ int main(int argc, char *argv[]){
     int ID;
 
     ss << "newJoin " << (*agv).getLocationX() << " " << (*agv).getLocationY() << " "
-    << (*agv).getCapacity() << " " << (*agv).getBattery();
+    << (*agv).getCapacity() << " " << (*agv).getBattery() << " " << (*agv).getMaxSpeed() << " " << (*agv).getStatus();
 
-    (*zmqcom).requestSend(ss.str()); // newJoin message reserved for new agvs
-    ss.clear();
-    strID = (*zmqcom).requestReceive(); // receive ID
+    s_send_nowait(reqSocJoin, ss.str());
+
+    ss.str(""); // clear the string
+
+    strID = s_recv(reqSocJoin); // receive ID
     
     ss << strID;
     ss >> ID;
     (*agv).setRobotID(ID);
 
-    std::vector<std::string> message;
+    std::cout << "ID assigned: " << ID << std::endl;
+
+    std::string topic, data;
+    std::string assign;
     std::vector<int> bid;
+    std::string reqMessage;
 
     while(true){
-        message = (*zmqcom).subscribeMessage();
-        if(message.size() > 0){
-            if(message.at(0) == "newTask"){
-                bid = bidForTask(agv, message.at(1));
-                (*zmqcom).publishMessage(std::to_string(bid.at(0)), std::to_string(bid.at(1)));
+        assign = (*agv).checkTimeLimits();
+        if(!assign.empty()){
+            s_send_nowait(reqSocAssign, assign);
+            reqMessage = s_recv(reqSocAssign);
+            std::cout << "Received coordinates: " << reqMessage << std::endl;
+        }
+
+        topic = s_recv_nowait(subSocTask);
+        if(!topic.empty()){
+            data = s_recv_nowait(subSocTask);
+            if(topic == "newTask"){
+                std::cout << "Received new task: " << data << std::endl;
+                bid = bidForTask(agv, data);
+                // publish bid
+                s_sendmore(pubSoc, "newBid");
+                s_send_nowait(pubSoc, std::to_string(bid.at(0)) + " " + std::to_string(bid.at(1)) + " " + std::to_string(bid.at(2)));
             }
-            message.clear();
+        }
+        topic = s_recv_nowait(subSocFwd);
+        if(!topic.empty()){
+            data = s_recv_nowait(subSocFwd);
+            if(topic == "newBid"){
+                std::cout << "Received new bid: " << data <<std::endl;
+                receiveBids(agv, data);
+            }
         }
     }
-
 
     return 0;
 }
@@ -77,7 +109,20 @@ std::vector<int> bidForTask(Robot *agv, std::string info){
     ss << info;
     ss >> taskID >> locationStartX >> locationStartY >> locationEndX >> locationEndY >> weight;
     result.push_back(taskID);
+    result.push_back((*agv).getRobotID());
     bidValue =(*agv).findCompatibility(locationStartX, locationStartY, locationEndX, locationEndY, weight);
+    // create entry with self as best bid to begin with
+    (*agv).addSubscription(taskID, (*agv).getRobotID(), bidValue);
     result.push_back(bidValue);
     return result;
+}
+
+// update the best bid for a particular task. If agv ID matches that of best bid after a period of time,
+// request assignment
+bool receiveBids(Robot *agv, std::string bid){
+    std::stringstream ss;
+    int taskID, robotID, comp;
+    ss << bid;
+    ss >> taskID >> robotID >> comp;
+    (*agv).addSubscription(taskID, robotID, comp);
 }

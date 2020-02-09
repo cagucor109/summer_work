@@ -3,19 +3,21 @@
 #include "SQLAPIcoms.hpp"
 #include <iostream>
 
-std::string createTask(ZMQcoms *com, std::string mode);
+std::string createTask(std::string mode);
 std::string updateTasksTable(SQLAPIcoms *com, std::string task);
 
 int main(int argc, char *argv[]){
 
     srand(time(NULL));
-
-    ZMQcoms *zmqcom = new ZMQcoms();
     SQLAPIcoms *sqlcom = new SQLAPIcoms();
     Robot *agv = new Robot();
 
-    (*zmqcom).setUpPrompt();
-    (*sqlcom).connectToDBPrompt();
+    zmq::context_t context (1);
+    
+    zmq::socket_t pubSoc(context, ZMQ_PUB);
+    pubSoc.bind("tcp://*:5551");
+
+    (*sqlcom).connectToDB("wmrdb", "root", "agu109");
 
     std::string mode;
 
@@ -24,9 +26,10 @@ int main(int argc, char *argv[]){
 
     std::string newTask, newTaskID;
     while(true){
-        newTask = createTask(zmqcom, mode);
+        newTask = createTask(mode);
         newTaskID = updateTasksTable(sqlcom, newTask);
-        (*zmqcom).publishMessage("newTask", newTaskID + " " + newTask);
+        s_sendmore(pubSoc, "newTask");
+        s_send_nowait(pubSoc, newTaskID + " " + newTask);
         std::cout << "Sending: newTask " << newTaskID + " " + newTask << std::endl;
         sleep(5);
     }
@@ -35,7 +38,7 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-std::string createTask(ZMQcoms *com, std::string mode){
+std::string createTask(std::string mode){
     std::stringstream ss;
     int locationStartX, locationStartY, locationEndX, locationEndY, weight;
     if(mode == "manual"){
@@ -70,7 +73,7 @@ std::string updateTasksTable(SQLAPIcoms *sqlcom, std::string task){
 
     task = task + " ";
                 
-    std::vector<int> values;
+    std::vector<std::string> values;
     std::string delimiter = " ";
 
     size_t pos = 0;
@@ -80,7 +83,7 @@ std::string updateTasksTable(SQLAPIcoms *sqlcom, std::string task){
         // Split the remainder of the string
         while ((pos = task.find(delimiter)) != std::string::npos) {
             token = task.substr(0, pos);
-            values.push_back(std::stoi(token));
+            values.push_back(token);
             task.erase(0, pos + delimiter.length());
         }
 

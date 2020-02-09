@@ -2,18 +2,42 @@
 
 ZMQcoms::ZMQcoms(){
     _context = new zmq::context_t (1);
+    _numReqSoc = 0;
+    _numRepSoc = 0;
+    _numSubSoc = 0;
+    _numPubSoc = 0;
 }
 
 // Setup the socket to the pattern specified
 void ZMQcoms::setUp(Pattern type){
     if(type == REQ){
-        _socketReq = new zmq::socket_t(*_context, type);
+        if(_numReqSoc == 0){
+            _socketReq = new zmq::socket_t(*_context, type);
+        }else if(_numReqSoc == 1){
+            _socketReq2 = new zmq::socket_t(*_context, type);
+        }
+        _numReqSoc++;
     }else if(type == SUB){
-        _socketSub = new zmq::socket_t(*_context, type);
+        if(_numSubSoc == 0){
+            _socketSub = new zmq::socket_t(*_context, type);
+        } else if(_numSubSoc == 1){
+            _socketSub2 = new zmq::socket_t(*_context, type);
+        }
+        _numSubSoc++;
     }else if(type == REP){
-        _socketRep = new zmq::socket_t(*_context, type);
+        if(_numRepSoc == 0){
+            _socketRep = new zmq::socket_t(*_context, type);
+        }else if(_numRepSoc == 1){
+            _socketRep2 = new zmq::socket_t(*_context, type);
+        }
+        _numRepSoc++;
     }else{
-        _socketPub = new zmq::socket_t(*_context, type);
+        if(_numPubSoc == 0){
+            _socketPub = new zmq::socket_t(*_context, type);
+        }else if(_numPubSoc == 1){
+            _socketPub2 = new zmq::socket_t(*_context, type);
+        }
+        _numPubSoc++;
     }
 }
 
@@ -119,7 +143,8 @@ void ZMQcoms::setUpPrompt(){
                 std::cout << "Input space to subscribe to all topics...\n" << std::endl;
                 while(true){
                     printf("Topic:\t");
-                    std::cin >> topic;
+                    std::cin.ignore();
+                    std::getline(std::cin, topic);
                     std::cin.ignore();
                     subscribeToTopic(topic);
                     std::cout << "\nWould you like to subscribe to another topic?" << std::endl;

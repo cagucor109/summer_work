@@ -5,15 +5,10 @@
 #include "zhelpers.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <utility>
 
 class Robot{
 public:
-    enum Status{
-        IDLE,
-        PROCESSING,
-        ASSIGNED
-    };
-
     // Constructors
     Robot();
     Robot(std::string param);
@@ -24,6 +19,8 @@ public:
     int getLocationY();
     int getCapacity();
     int getBattery();
+    std::string getStatus();
+    int getMaxSpeed();
 
     // Setters
     void setRobotID(int robotID);
@@ -31,19 +28,30 @@ public:
     void setLocationY(int locationY);
     void setCapacity(int capacity);
     void setBattery(int battery);
+    void setStatus(std::string status);
+    void setMaxSpeed(int speed);
 
     // Utility
     int findCompatibility(int locationStartX, int locationStartY, int locationEndX, int locationEndY, int weight);
-    void addSubscription(std::string taskID);
-    std::vector<std::string> getTaskSubscriptions();
+    void addSubscription(int taskID, int workerID, int compatibility);
+    void updateSubscription(int index, int workerID, int compatibility);
+    std::string checkTimeLimits();
+    // perform task
+
 private:
+    int _totalrobots;
     int _robotID;
     int _locationX;
     int _locationY;
     int _capacity;
     int _battery;
-    std::vector<std::string> _taskSubscription;
-    Robot::Status _status;
+    int _maxSpeed;
+    std::string _status;
+    std::vector<int> _taskIDSubscription;
+    std::vector<int> _workerIDBestBid;
+    std::vector<int> _compatibilityScores;
+    std::vector<clock_t> _timeSinceUpdate;
+    std::vector<std::pair<int, int>> _assignments; // rethink storage
 };
 
 #endif

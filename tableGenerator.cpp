@@ -16,11 +16,11 @@ int main(int argc, char* argv[]) {
         cmd.Execute();
 
         cmd.setCommandText(
-            "CREATE TABLE workers(workerID int NOT NULL AUTO_INCREMENT PRIMARY KEY, locationX int, locationY int, capacity int, battery int)");
+            "CREATE TABLE workers(workerID int NOT NULL AUTO_INCREMENT PRIMARY KEY, locationX int, locationY int, capacity int, battery int, maxSpeed int, status varchar(255))");
         cmd.Execute();
 
         cmd.setCommandText(
-            "CREATE TABLE assignments(assignmentID int NOT NULL AUTO_INCREMENT PRIMARY KEY, taskID int, robotID int, status int, startPercent int, endPercent int)");
+            "CREATE TABLE assignments(assignmentID int NOT NULL AUTO_INCREMENT PRIMARY KEY, taskID int, robotID int, status varchar(255), time int)");
         cmd.Execute();
     
         con.Commit();

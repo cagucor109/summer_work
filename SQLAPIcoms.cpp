@@ -27,30 +27,69 @@ void SQLAPIcoms::connectToDB(std::string dB, std::string user, std::string pwd){
     (*_cmd).setConnection(_con);
 }
 
-void SQLAPIcoms::insertIntoTasks(std::vector<int> values){
+void SQLAPIcoms::insertIntoTasks(std::vector<std::string> values){
     (*_cmd).setCommandText(
             "INSERT INTO tasks(locationStartX, locationStartY, locationEndX, locationEndY, weight) VALUES(:1, :2, :3, :4, :5)");
     
-    for(int i = 0; i < values.size(); i++){
-        (*_cmd).Param(i+1).setAsInt64() = values.at(i);
-    }
+    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
+    (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(2));
+    (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(3));
+    (*_cmd).Param(5).setAsInt64() = std::stoi(values.at(4));
    
     (*_cmd).Execute();
     
     (*_con).Commit();
 }
 
-void SQLAPIcoms::insertIntoWorkers(std::vector<int> values){
+void SQLAPIcoms::insertIntoWorkers(std::vector<std::string> values){
     (*_cmd).setCommandText(
-            "INSERT INTO workers(locationX, locationY, capacity, battery) VALUES(:1, :2, :3, :4)");
+            "INSERT INTO workers(locationX, locationY, capacity, battery, maxSpeed, status) VALUES(:1, :2, :3, :4, :5, :6)");
     
-    for(int i = 0; i < values.size(); i++){
-        (*_cmd).Param(i+1).setAsInt64() = values.at(i);
-    }
+    
+    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
+    (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(2));
+    (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(3));
+    (*_cmd).Param(5).setAsInt64() = std::stoi(values.at(4));
+    (*_cmd).Param(6).setAsString() = values.at(5).c_str();
    
     (*_cmd).Execute();
     
     (*_con).Commit();
+}
+
+void SQLAPIcoms::insertIntoAssignments(std::vector<std::string> values){
+    (*_cmd).setCommandText(
+            "INSERT INTO assignments(taskID, robotID, status, time) VALUES(:1, :2, :3, :4)");
+    
+    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
+    (*_cmd).Param(3).setAsString() = "assigned";
+    (*_cmd).Param(4).setAsInt64() = 0;
+
+    (*_cmd).Execute();
+    
+    (*_con).Commit();
+}
+
+std::string SQLAPIcoms::getCoordinates(int taskID){
+    (*_cmd).setCommandText(
+            "SELECT locationStartX, locationStartY, locationEndX, locationEndY FROM tasks WHERE taskID = :1");
+
+    (*_cmd).Param(1).setAsInt64() = taskID;
+
+    (*_cmd).Execute();
+    (*_cmd).FetchFirst();
+    int sX = (*_cmd).Field("locationStartX").asInt64();
+    int sY = (*_cmd).Field("locationStartY").asInt64();
+    int eX = (*_cmd).Field("locationEndX").asInt64();
+    int eY = (*_cmd).Field("locationEndY").asInt64();
+
+    std::stringstream ss;
+    ss << sX << " " << sY << " " << eX << " " << eY;
+
+    return ss.str();
 }
 
 int SQLAPIcoms::getNewID(){

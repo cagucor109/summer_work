@@ -12,9 +12,18 @@ class ZMQcoms{
         zmq::context_t* _context;
         // possibly make a vector of sockets to allow arbitrary amount
         zmq::socket_t* _socketPub;
+        zmq::socket_t* _socketPub2;
         zmq::socket_t* _socketSub;
+        zmq::socket_t* _socketSub2;
         zmq::socket_t* _socketReq;
+        zmq::socket_t* _socketReq2;
         zmq::socket_t* _socketRep;
+        zmq::socket_t* _socketRep2;
+
+        int _numPubSoc;
+        int _numSubSoc;
+        int _numRepSoc;
+        int _numReqSoc;
 
     public:
         enum Pattern{

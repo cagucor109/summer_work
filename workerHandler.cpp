@@ -6,6 +6,7 @@ Requirements:   Should have at least a request and reply socket to communicate w
 */
 
 #include <iostream>
+#include <typeinfo>
 #include "SQLAPIcoms.hpp"
 #include "ZMQcoms.hpp"
 
@@ -13,13 +14,14 @@ void newAGV();
 std::string processReplyMessage(SQLAPIcoms *sqlcom, std::string repMessage);
 
 int main(int argc, char *argv[]){
-    ZMQcoms *zmqcom = new ZMQcoms();
     SQLAPIcoms *sqlcom = new SQLAPIcoms();
 
-    std::cout << "workerHandler specific: please include at least a REQ and REP socket...\n" << std::endl;
+    zmq::context_t context (1);
+    
+    zmq::socket_t repSoc (context, ZMQ_REP);
+    repSoc.bind("tcp://*:5550");
 
-    (*zmqcom).setUpPrompt();
-    (*sqlcom).connectToDBPrompt();
+    (*sqlcom).connectToDB("wmrdb", "root", "agu109");
 
     std::string repMessage, reqMessage, subMessage, pubMessage;
 
@@ -27,11 +29,12 @@ int main(int argc, char *argv[]){
         /* ---- Request updates from current workers ----- */
 
         /* ---- Reply to new worker requests and update database -----*/
-        repMessage = (*zmqcom).replyReceive();
+        repMessage = s_recv_nowait(repSoc);
         if(!repMessage.empty()){
             std::cout << "Received: " << repMessage << std::endl;
             repMessage = processReplyMessage(sqlcom, repMessage);
-            (*zmqcom).replySend(repMessage);
+            std::cout << "Sending ID: " << repMessage <<std::endl;
+            s_send(repSoc, repMessage);
         }
     }
 
@@ -46,7 +49,7 @@ std::string processReplyMessage(SQLAPIcoms *sqlcom, std::string repMessage){
 
     repMessage = repMessage + " ";
                 
-    std::vector<int> values;
+    std::vector<std::string> values;
     std::string delimiter = " ";
     std::string command;
 
@@ -62,7 +65,7 @@ std::string processReplyMessage(SQLAPIcoms *sqlcom, std::string repMessage){
         // Split the remainder of the string
         while ((pos = repMessage.find(delimiter)) != std::string::npos) {
             token = repMessage.substr(0, pos);
-            values.push_back(std::stoi(token));
+            values.push_back(token);
             repMessage.erase(0, pos + delimiter.length());
         }
 

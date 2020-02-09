@@ -6,6 +6,7 @@
 #include <vector>
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
 
 class SQLAPIcoms{
     private:
@@ -19,8 +20,12 @@ class SQLAPIcoms{
         void connectToDBPrompt();
         void connectToDB(std::string dB, std::string user, std::string pwd);
 
-        void insertIntoTasks(std::vector<int> values);
-        void insertIntoWorkers(std::vector<int> values);
+        void insertIntoTasks(std::vector<std::string> values);
+        void insertIntoWorkers(std::vector<std::string> values);
+        void insertIntoAssignments(std::vector<std::string> values);
+
+        std::string getCoordinates(int taskID);
+        bool checkIfTaken(int taskID);
 
         int getNewID();
         ~SQLAPIcoms();
