@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named tableClear
+
+# Build rule for target.
+tableClear: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tableClear
+.PHONY : tableClear
+
+# fast build rule for target.
+tableClear/fast:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/build
+.PHONY : tableClear/fast
+
+#=============================================================================
 # Target rules for targets named assignmentHandler
 
 # Build rule for target.
@@ -233,6 +246,7 @@ Robot.o: Robot.cpp.o
 
 # target to build an object file
 Robot.cpp.o:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/Robot.cpp.o
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/Robot.cpp.o
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/Robot.cpp.o
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/Robot.cpp.o
@@ -248,6 +262,7 @@ Robot.i: Robot.cpp.i
 
 # target to preprocess a source file
 Robot.cpp.i:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/Robot.cpp.i
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/Robot.cpp.i
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/Robot.cpp.i
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/Robot.cpp.i
@@ -263,6 +278,7 @@ Robot.s: Robot.cpp.s
 
 # target to generate assembly for a file
 Robot.cpp.s:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/Robot.cpp.s
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/Robot.cpp.s
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/Robot.cpp.s
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/Robot.cpp.s
@@ -278,6 +294,7 @@ SQLAPIcoms.o: SQLAPIcoms.cpp.o
 
 # target to build an object file
 SQLAPIcoms.cpp.o:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/SQLAPIcoms.cpp.o
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/SQLAPIcoms.cpp.o
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/SQLAPIcoms.cpp.o
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.o
@@ -293,6 +310,7 @@ SQLAPIcoms.i: SQLAPIcoms.cpp.i
 
 # target to preprocess a source file
 SQLAPIcoms.cpp.i:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/SQLAPIcoms.cpp.i
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/SQLAPIcoms.cpp.i
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/SQLAPIcoms.cpp.i
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.i
@@ -308,6 +326,7 @@ SQLAPIcoms.s: SQLAPIcoms.cpp.s
 
 # target to generate assembly for a file
 SQLAPIcoms.cpp.s:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/SQLAPIcoms.cpp.s
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/SQLAPIcoms.cpp.s
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/SQLAPIcoms.cpp.s
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/SQLAPIcoms.cpp.s
@@ -323,6 +342,7 @@ ZMQcoms.o: ZMQcoms.cpp.o
 
 # target to build an object file
 ZMQcoms.cpp.o:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/ZMQcoms.cpp.o
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/ZMQcoms.cpp.o
@@ -338,6 +358,7 @@ ZMQcoms.i: ZMQcoms.cpp.i
 
 # target to preprocess a source file
 ZMQcoms.cpp.i:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/ZMQcoms.cpp.i
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/ZMQcoms.cpp.i
@@ -353,6 +374,7 @@ ZMQcoms.s: ZMQcoms.cpp.s
 
 # target to generate assembly for a file
 ZMQcoms.cpp.s:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/agvForwarder.dir/build.make CMakeFiles/agvForwarder.dir/ZMQcoms.cpp.s
 	$(MAKE) -f CMakeFiles/workerHandler.dir/build.make CMakeFiles/workerHandler.dir/ZMQcoms.cpp.s
@@ -442,6 +464,33 @@ assignmentHandler.s: assignmentHandler.cpp.s
 assignmentHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/assignmentHandler.dir/build.make CMakeFiles/assignmentHandler.dir/assignmentHandler.cpp.s
 .PHONY : assignmentHandler.cpp.s
+
+tableClear.o: tableClear.cpp.o
+
+.PHONY : tableClear.o
+
+# target to build an object file
+tableClear.cpp.o:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/tableClear.cpp.o
+.PHONY : tableClear.cpp.o
+
+tableClear.i: tableClear.cpp.i
+
+.PHONY : tableClear.i
+
+# target to preprocess a source file
+tableClear.cpp.i:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/tableClear.cpp.i
+.PHONY : tableClear.cpp.i
+
+tableClear.s: tableClear.cpp.s
+
+.PHONY : tableClear.s
+
+# target to generate assembly for a file
+tableClear.cpp.s:
+	$(MAKE) -f CMakeFiles/tableClear.dir/build.make CMakeFiles/tableClear.dir/tableClear.cpp.s
+.PHONY : tableClear.cpp.s
 
 tableGenerator.o: tableGenerator.cpp.o
 
@@ -611,6 +660,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... tableClear"
 	@echo "... assignmentHandler"
 	@echo "... agvForwarder"
 	@echo "... workerHandler"
@@ -640,6 +690,9 @@ help:
 	@echo "... assignmentHandler.o"
 	@echo "... assignmentHandler.i"
 	@echo "... assignmentHandler.s"
+	@echo "... tableClear.o"
+	@echo "... tableClear.i"
+	@echo "... tableClear.s"
 	@echo "... tableGenerator.o"
 	@echo "... tableGenerator.i"
 	@echo "... tableGenerator.s"

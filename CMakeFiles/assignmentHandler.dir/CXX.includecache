@@ -19,6 +19,8 @@ cstdlib
 -
 ctime
 -
+cmath
+-
 utility
 -
 
@@ -62,6 +64,8 @@ ZMQcoms.hpp
 SQLAPIcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
 iostream
+-
+cctype
 -
 
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp

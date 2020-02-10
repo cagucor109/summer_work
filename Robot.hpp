@@ -5,6 +5,7 @@
 #include "zhelpers.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include <utility>
 
 class Robot{
@@ -36,7 +37,8 @@ public:
     void addSubscription(int taskID, int workerID, int compatibility);
     void updateSubscription(int index, int workerID, int compatibility);
     std::string checkTimeLimits();
-    // perform task
+    void updateAssignments(std::string update);
+    std::string workOnAssignments();
 
 private:
     int _totalrobots;
@@ -51,7 +53,11 @@ private:
     std::vector<int> _workerIDBestBid;
     std::vector<int> _compatibilityScores;
     std::vector<clock_t> _timeSinceUpdate;
-    std::vector<std::pair<int, int>> _assignments; // rethink storage
+    std::vector<std::string> _assignments; 
+    std::vector<clock_t> _assignmentTime; 
+    std::vector<int> _assignmentDist; 
+    bool _reachedStart;
+    bool _started;
 };
 
 #endif

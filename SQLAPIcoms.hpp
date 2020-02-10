@@ -24,6 +24,10 @@ class SQLAPIcoms{
         void insertIntoWorkers(std::vector<std::string> values);
         void insertIntoAssignments(std::vector<std::string> values);
 
+        void updateWorkerStatus(std::vector<std::string> values);
+        void updateAssignmentStatus(std::vector<std::string> values);
+        void updateAssignmentTimeDist(std::vector<std::string> values);
+
         std::string getCoordinates(int taskID);
         bool checkIfTaken(int taskID);
 

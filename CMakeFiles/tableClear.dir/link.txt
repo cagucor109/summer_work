@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/tableClear.dir/tableClear.cpp.o CMakeFiles/tableClear.dir/ZMQcoms.cpp.o CMakeFiles/tableClear.dir/SQLAPIcoms.cpp.o CMakeFiles/tableClear.dir/Robot.cpp.o  -o tableClear -lzmq -lsqlapi -ldl 

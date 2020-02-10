@@ -61,7 +61,7 @@ void SQLAPIcoms::insertIntoWorkers(std::vector<std::string> values){
 
 void SQLAPIcoms::insertIntoAssignments(std::vector<std::string> values){
     (*_cmd).setCommandText(
-            "INSERT INTO assignments(taskID, robotID, status, time) VALUES(:1, :2, :3, :4)");
+            "INSERT INTO assignments(taskID, robotID, status, timeTaken) VALUES(:1, :2, :3, :4)");
     
     (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
     (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
@@ -73,6 +73,46 @@ void SQLAPIcoms::insertIntoAssignments(std::vector<std::string> values){
     (*_con).Commit();
 }
 
+// workerID and status
+void SQLAPIcoms::updateWorkerStatus(std::vector<std::string> values){
+    (*_cmd).setCommandText(
+            "UPDATE workers SET status = :1 WHERE taskID = :2");
+
+    (*_cmd).Param(1).setAsString() = values.at(1).c_str();
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(0));
+
+    (*_cmd).Execute();
+
+    (*_con).Commit();
+}
+
+//taskID workerID status
+void SQLAPIcoms::updateAssignmentStatus(std::vector<std::string> values){
+    (*_cmd).setCommandText(
+            "UPDATE assignments SET status = :1 WHERE taskID = :2 AND robotID = :3");
+
+    (*_cmd).Param(1).setAsString() = values.at(2).c_str();
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(0));
+    (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(1));
+
+    (*_cmd).Execute();
+    (*_con).Commit();
+}
+
+//taskID workerID time distance
+void SQLAPIcoms::updateAssignmentTimeDist(std::vector<std::string> values){
+    (*_cmd).setCommandText(
+            "UPDATE assignments SET timeTaken = :1, distance = :2 WHERE taskID = :3 AND robotID = :4");
+
+    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(2));
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(3));
+    (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(0));
+    (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(1));
+
+    (*_cmd).Execute();
+    (*_con).Commit();
+}
+
 std::string SQLAPIcoms::getCoordinates(int taskID){
     (*_cmd).setCommandText(
             "SELECT locationStartX, locationStartY, locationEndX, locationEndY FROM tasks WHERE taskID = :1");
@@ -81,6 +121,7 @@ std::string SQLAPIcoms::getCoordinates(int taskID){
 
     (*_cmd).Execute();
     (*_cmd).FetchFirst();
+
     int sX = (*_cmd).Field("locationStartX").asInt64();
     int sY = (*_cmd).Field("locationStartY").asInt64();
     int eX = (*_cmd).Field("locationEndX").asInt64();

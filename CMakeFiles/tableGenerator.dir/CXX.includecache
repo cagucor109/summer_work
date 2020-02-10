@@ -19,6 +19,8 @@ cstdlib
 -
 ctime
 -
+cmath
+-
 utility
 -
 
@@ -57,7 +59,7 @@ zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 
 /home/cagu/WMR/intern_project/summer_work/tableGenerator.cpp
-stdio.h
+iostream
 -
 SQLAPI.h
 -

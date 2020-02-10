@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
         s_sendmore(pubSoc, "newTask");
         s_send_nowait(pubSoc, newTaskID + " " + newTask);
         std::cout << "Sending: newTask " << newTaskID + " " + newTask << std::endl;
-        sleep(5);
+        sleep(7);
     }
     
 

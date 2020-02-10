@@ -58,11 +58,7 @@ vector
 zhelpers.hpp
 /home/cagu/WMR/intern_project/summer_work/zhelpers.hpp
 
-/home/cagu/WMR/intern_project/summer_work/taskHandler.cpp
-ZMQcoms.hpp
-/home/cagu/WMR/intern_project/summer_work/ZMQcoms.hpp
-Robot.hpp
-/home/cagu/WMR/intern_project/summer_work/Robot.hpp
+/home/cagu/WMR/intern_project/summer_work/tableClear.cpp
 SQLAPIcoms.hpp
 /home/cagu/WMR/intern_project/summer_work/SQLAPIcoms.hpp
 iostream

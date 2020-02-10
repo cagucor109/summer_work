@@ -67,15 +67,21 @@ int main(int argc, char *argv[]){
     std::string assign;
     std::vector<int> bid;
     std::string reqMessage;
+    std::string taskInfo;
+
+    int slowWork = 0; // slow down motion
 
     while(true){
+        // assignment
         assign = (*agv).checkTimeLimits();
         if(!assign.empty()){
             s_send_nowait(reqSocAssign, assign);
             reqMessage = s_recv(reqSocAssign);
             std::cout << "Received coordinates: " << reqMessage << std::endl;
+            (*agv).updateAssignments(reqMessage);
         }
 
+        // new tasks
         topic = s_recv_nowait(subSocTask);
         if(!topic.empty()){
             data = s_recv_nowait(subSocTask);
@@ -87,6 +93,8 @@ int main(int argc, char *argv[]){
                 s_send_nowait(pubSoc, std::to_string(bid.at(0)) + " " + std::to_string(bid.at(1)) + " " + std::to_string(bid.at(2)));
             }
         }
+
+        // new bids
         topic = s_recv_nowait(subSocFwd);
         if(!topic.empty()){
             data = s_recv_nowait(subSocFwd);
@@ -94,6 +102,19 @@ int main(int argc, char *argv[]){
                 std::cout << "Received new bid: " << data <<std::endl;
                 receiveBids(agv, data);
             }
+        }
+
+        if(slowWork == 1000000){
+            slowWork = 0;
+             // work
+            taskInfo = (*agv).workOnAssignments();
+            if(!taskInfo.empty()){
+                s_send_nowait(reqSocAssign, taskInfo);
+                reqMessage = s_recv(reqSocAssign);
+                std::cout << reqMessage << std::endl;
+            }
+        }else{
+            slowWork++;
         }
     }
 

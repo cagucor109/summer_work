@@ -30,7 +30,6 @@ int main(int argc, char *argv[]){
         topic = s_recv_nowait (subSoc);
         if(!topic.empty()){
             data = s_recv_nowait (subSoc);
-
             std::cout << "Received: " << topic << "\t" << data <<std::endl;
             // publish message
             s_sendmore(pubSoc, topic);

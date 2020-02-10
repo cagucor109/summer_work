@@ -28,3 +28,6 @@ target_link_libraries(agvForwarder -lzmq -lsqlapi -ldl)
 
 add_executable(assignmentHandler assignmentHandler.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
 target_link_libraries(assignmentHandler -lzmq -lsqlapi -ldl)
+
+add_executable(tableClear tableClear.cpp zhelpers.hpp ZMQcoms.hpp ZMQcoms.cpp SQLAPIcoms.hpp SQLAPIcoms.cpp Robot.hpp Robot.cpp)
+target_link_libraries(tableClear -lzmq -lsqlapi -ldl)
