@@ -42,6 +42,9 @@ int main(int argc, char *argv[]){
     zmq::socket_t pubSoc(context, ZMQ_PUB);
     pubSoc.connect("tcp://localhost:5552");
 
+    zmq::socket_t repSoc(context, ZMQ_REP);
+    repSoc.connect("tcp://localhost:5555");
+
     // join topology
 
     std::stringstream ss;
@@ -60,18 +63,21 @@ int main(int argc, char *argv[]){
     ss << strID;
     ss >> ID;
     (*agv).setRobotID(ID);
+    ss.str("");
+    ss.clear();
 
     std::cout << "ID assigned: " << ID << std::endl;
 
     std::string topic, data;
     std::string assign;
     std::vector<int> bid;
-    std::string reqMessage;
+    std::string reqMessage, repMessage;
     std::string taskInfo;
 
     int slowWork = 0; // slow down motion
 
     while(true){
+
         // assignment
         assign = (*agv).checkTimeLimits();
         if(!assign.empty()){
@@ -104,9 +110,19 @@ int main(int argc, char *argv[]){
             }
         }
 
+        // updates
+        repMessage = s_recv_nowait(repSoc);
+        if(!repMessage.empty()){
+            ss << (*agv).getRobotID() << " " << (*agv).getLocationX() << " " << (*agv).getLocationY() << " " << (*agv).getStatus();
+            s_send(repSoc, ss.str());
+            ss.str("");
+            ss.clear();
+        }
+
+
+        // work
         if(slowWork == 1000000){
             slowWork = 0;
-             // work
             taskInfo = (*agv).workOnAssignments();
             if(!taskInfo.empty()){
                 s_send_nowait(reqSocAssign, taskInfo);

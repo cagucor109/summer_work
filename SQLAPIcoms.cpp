@@ -28,62 +28,91 @@ void SQLAPIcoms::connectToDB(std::string dB, std::string user, std::string pwd){
 }
 
 void SQLAPIcoms::insertIntoTasks(std::vector<std::string> values){
-    (*_cmd).setCommandText(
-            "INSERT INTO tasks(locationStartX, locationStartY, locationEndX, locationEndY, weight) VALUES(:1, :2, :3, :4, :5)");
+    try{
+        (*_cmd).setCommandText(
+                "INSERT INTO tasks(locationStartX, locationStartY, locationEndX, locationEndY, weight) VALUES(:1, :2, :3, :4, :5)");
+        
+        (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
+        (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
+        (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(2));
+        (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(3));
+        (*_cmd).Param(5).setAsInt64() = std::stoi(values.at(4));
     
-    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
-    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
-    (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(2));
-    (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(3));
-    (*_cmd).Param(5).setAsInt64() = std::stoi(values.at(4));
-   
-    (*_cmd).Execute();
-    
-    (*_con).Commit();
+        (*_cmd).Execute();
+        
+        (*_con).Commit();
+    }
+    catch(SAException &x) {
+        (*_con).Rollback();
+        printf("%s\n", (const char*)x.ErrText());
+    }
 }
 
 void SQLAPIcoms::insertIntoWorkers(std::vector<std::string> values){
-    (*_cmd).setCommandText(
-            "INSERT INTO workers(locationX, locationY, capacity, battery, maxSpeed, status) VALUES(:1, :2, :3, :4, :5, :6)");
+    try{
+        (*_cmd).setCommandText(
+                "INSERT INTO workers(locationX, locationY, capacity, battery, maxSpeed, status) VALUES(:1, :2, :3, :4, :5, :6)");
+        
+        
+        (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
+        (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
+        (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(2));
+        (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(3));
+        (*_cmd).Param(5).setAsInt64() = std::stoi(values.at(4));
+        (*_cmd).Param(6).setAsString() = values.at(5).c_str();
     
-    
-    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
-    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
-    (*_cmd).Param(3).setAsInt64() = std::stoi(values.at(2));
-    (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(3));
-    (*_cmd).Param(5).setAsInt64() = std::stoi(values.at(4));
-    (*_cmd).Param(6).setAsString() = values.at(5).c_str();
-   
-    (*_cmd).Execute();
-    
-    (*_con).Commit();
+        (*_cmd).Execute();
+        
+        (*_con).Commit();  
+    }
+
+    catch(SAException &x) {
+        (*_con).Rollback();
+        printf("%s\n", (const char*)x.ErrText());
+    }
 }
 
 void SQLAPIcoms::insertIntoAssignments(std::vector<std::string> values){
-    (*_cmd).setCommandText(
+    try{
+        (*_cmd).setCommandText(
             "INSERT INTO assignments(taskID, robotID, status, timeTaken) VALUES(:1, :2, :3, :4)");
-    
-    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
-    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
-    (*_cmd).Param(3).setAsString() = "assigned";
-    (*_cmd).Param(4).setAsInt64() = 0;
+        
+        (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(0));
+        (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(1));
+        (*_cmd).Param(3).setAsString() = "assigned";
+        (*_cmd).Param(4).setAsInt64() = 0;
 
-    (*_cmd).Execute();
-    
-    (*_con).Commit();
+        (*_cmd).Execute();
+        
+        (*_con).Commit();
+    }
+
+    catch(SAException &x) {
+        (*_con).Rollback();
+        printf("%s\n", (const char*)x.ErrText());
+    }        
 }
 
-// workerID and status
+// workerID, locationX, locationY, status
 void SQLAPIcoms::updateWorkerStatus(std::vector<std::string> values){
+    try{
     (*_cmd).setCommandText(
-            "UPDATE workers SET status = :1 WHERE taskID = :2");
+        "UPDATE workers SET locationX = :1, locationY = :2, status = :3 WHERE workerID = :4");
 
-    (*_cmd).Param(1).setAsString() = values.at(1).c_str();
-    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(0));
+    (*_cmd).Param(1).setAsInt64() = std::stoi(values.at(1));
+    (*_cmd).Param(2).setAsInt64() = std::stoi(values.at(2));
+    (*_cmd).Param(3).setAsString() = values.at(3).c_str();
+    (*_cmd).Param(4).setAsInt64() = std::stoi(values.at(0));
 
     (*_cmd).Execute();
 
     (*_con).Commit();
+    }
+
+    catch(SAException &x) {
+        (*_con).Rollback();
+        printf("%s\n", (const char*)x.ErrText());
+    }
 }
 
 //taskID workerID status
