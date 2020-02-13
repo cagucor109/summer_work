@@ -54,10 +54,10 @@ std::string createTask(std::string mode){
         printf("Weight(2 - 5):\t");
         std::cin >> weight;
     }else if(mode == "automatic"){
-        locationStartX = rand() % 10;
-        locationStartY = rand() % 10;
-        locationEndX = rand() % 10;
-        locationEndY = rand() % 10;
+        locationStartX = rand() % 101;
+        locationStartY = rand() % 101;
+        locationEndX = rand() % 101;
+        locationEndY = rand() % 101;
         weight = rand() % 3 + 2;
     }else{
         // TODO: ADD ERROR HANDLING HERE

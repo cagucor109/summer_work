@@ -121,7 +121,7 @@ int main(int argc, char *argv[]){
 
 
         // work
-        if(slowWork == 1000000){
+        if(slowWork == 100000){
             slowWork = 0;
             taskInfo = (*agv).workOnAssignments();
             if(!taskInfo.empty()){

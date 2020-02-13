@@ -10,8 +10,8 @@ Robot::Robot(std::string param){
     if(param == "Simulation"){
         srand(time(NULL));
         _robotID = 0;
-        _locationX = rand() % 11;
-        _locationY = rand() % 11;
+        _locationX = rand() % 101;
+        _locationY = rand() % 101;
         _capacity = rand() % 4 + 2;
         _battery = rand() % 6 + 5;
         _status = "idle";
@@ -84,11 +84,11 @@ void Robot::setMaxSpeed(int speed){
 
 // potentially change to accepting different parameters e.g. vector, single string
 int Robot::findCompatibility(int locationStartX, int locationStartY, int locationEndX, int locationEndY, int weight){
-    int compStartX = abs(_locationX - locationStartX);
-    int compStartY = abs(_locationY - locationStartY);
+    int compStartX = abs(_locationX - locationStartX) * 2;
+    int compStartY = abs(_locationY - locationStartY) * 2;
     int compCap = (_capacity > weight) ? 1:0;
     float compBatt = _battery - abs(locationStartX - locationEndX) * weight / 5;
-    float compSpeed = (pow((locationEndX - locationStartX), 2) + pow(locationEndY - locationStartY, 2)) / (pow(_maxSpeed, 2) * 10);
+    float compSpeed = (pow((locationEndX - locationStartX), 2) + pow(locationEndY - locationStartY, 2)) / (pow(_maxSpeed, 2) * 200);
     int compQueue = _assignments.size();
     return compStartX + compStartY + compCap + compBatt - compSpeed - compQueue;
 }
